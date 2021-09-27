@@ -17,6 +17,16 @@ function NavBar() {
         border-bottom: 1px solid #e8e8e8
     `;
 
+    const LogoBox = styled.div`
+        padding: 0.5em 1em;
+
+        text-align: center;
+
+        @media only screen and (max-width: 48rem) {
+            margin: auto;
+        }
+    `;
+
     const MenuBar = styled.div`
         display: flex;
         margin: 0 auto;
@@ -69,7 +79,6 @@ function NavBar() {
             background: white;
             cursor: pointer;
 
-            margin-left: auto;
             padding: 0.8em 1.3em;
 
             &:hover{
@@ -105,7 +114,7 @@ function NavBar() {
                     align-items: center;
     
                     position: absolute;
-                    top: 3em;
+                    top: 2.5em;
                     right: 0;
 
                     height: 100vh;
@@ -139,9 +148,12 @@ function NavBar() {
     return (
         <NavBox>
             {/* Logo */}
-            <Link to="/" 
-                style={{textAlign: 'center', fontSize: '1.5rem', padding: '0.5em 1em', color: '#ec407a'}}
-            >Logo</Link>
+            <LogoBox>
+                <Link to="/" 
+                    style={{textAlign: 'center', fontSize: '1.5rem', padding: '0.5em 1em', color: '#ec407a'}}
+                >Logo</Link>
+            </LogoBox>
+           
             {/* menu bar */}
             <MenuBar>
                 <Link to="/"
