@@ -6,131 +6,138 @@ import { Link, useHistory } from 'react-router-dom';
 import {FiMenu} from 'react-icons/fi';
 import {USER_SERVER} from '../../Config';
 
-function NavBar() {
-    const NavBox = styled.nav`
-        width: 100%;
+const NavBox = styled.nav`
+    width: 100%;
 
-        display: flex;
-        position: relative;
+    display: flex;
+    position: relative;
 
-        box-shadow: 0 0 30px #f3f1f1;
-        border-bottom: 1px solid #e8e8e8
-    `;
+    box-shadow: 0 0 30px #f3f1f1;
+    border-bottom: 1px solid #e8e8e8
+`;
 
-    const LogoBox = styled.div`
-        padding: 0.5em 1em;
+const LogoBox = styled.div`
+    padding: 0.5em 1em;
+
+    text-align: center;
+
+    @media only screen and (max-width: 48rem) {
+        margin: auto;
+    }
+`;
+
+const MenuBar = styled.div`
+    display: flex;
+    margin: 0 auto;
+    justify-content: space-evenly;
+
+    @media only screen and (max-width: 48rem) {
+        display: none;
+    }
+`;
+
+const SubMenuBar = styled.div`
+    display: flex;
+    justify-content: space-between;
+
+    margin-right: 1em;
+
+    @media only screen and (max-width: 48rem) {
+        display: none;
+    }
+`;
+
+const Button = styled.button`
+    width: 100%;
+    height: 100%;
+
+    background: white;
+    border: none;
+    outline: none;
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-align: center;
+    padding: 0.8em 1.5em;
+    cursor: pointer;
+
+    &:hover{
+        color: #ec407a;
+        border-bottom: 1px solid #ec407a;
+    }
+    &:active{
+        background: rgba(0,0,0, .03);
+    }
+`;
+
+const DrawerButton = styled.button`
+    display: none;
+    @media only screen and (max-width: 48rem) {
+        display: inline-box;
 
         text-align: center;
-
-        @media only screen and (max-width: 48rem) {
-            margin: auto;
-        }
-    `;
-
-    const MenuBar = styled.div`
-        display: flex;
-        margin: 0 auto;
-        justify-content: space-evenly;
-
-        @media only screen and (max-width: 48rem) {
-            display: none;
-        }
-    `;
-
-    const SubMenuBar = styled.div`
-        display: flex;
-        justify-content: space-between;
-
-        margin-right: 1em;
-
-        @media only screen and (max-width: 48rem) {
-            display: none;
-        }
-    `;
-
-    const Button = styled.button`
-        height: 100%;
-
-        background: white;
-        border: none;
-        outline: none;
         font-size: 0.8rem;
         font-weight: 500;
-        text-align: center;
-        padding: 0.8em 1.5em;
+        border: none;
+        outline: none;
+        background: white;
         cursor: pointer;
+
+        padding: 0.8em 1.3em;
 
         &:hover{
             color: #ec407a;
-            border-bottom: 1px solid #ec407a;
         }
-    `;
-    
-    const DrawerButton = styled.button`
-        display: none;
-        @media only screen and (max-width: 48rem) {
-            display: inline-box;
+        
+    }
+`;
 
-            text-align: center;
-            font-size: 0.8rem;
-            font-weight: 500;
-            border: none;
-            outline: none;
-            background: white;
-            cursor: pointer;
+const Drawer = styled.div`
+    z-index: 5;
 
-            padding: 0.8em 1.3em;
+    display: none;
 
-            &:hover{
-                color: #ec407a;
-            }
-        }
-    `;
+    height: 100vh;
+    padding: 1em;
 
-    const Drawer = styled.div`
-        z-index: 5;
+    background: rgba(255, 255, 255, .7);
+    font-size: 1.5em;
+    border-left: 1px solid #e8e8e8;
+    box-shadow: 0 0 10px #f3f1f1;
 
-        display: none;
+    @media only screen and (max-width: 48rem) {
+        display: flex;
+        flex-direction: column;
+        
+        align-items: center;
 
         position: absolute;
-        top: 3em;
-        right: -255px;
+        top: 2.5em;
+        right: 0;
 
-        height: 100vh;
-        padding: 1em;
+        max-width: 0;
+        opacity: 0;
+        transition: max-width 0.5s, opacity 0.4s;
 
-        background: rgba(255, 255, 255, .7);
-        font-size: 1.5em;
-        border-left: 1px solid #e8e8e8;
-        box-shadow: 0 0 10px #f3f1f1;
+        ${props => 
+            props.open &&
+            css`
+                max-width: 100%;
+                opacity: 1;
+                height: 100vh;
+                padding: 1em;
 
-        @media only screen and (max-width: 48rem) {
-            ${props => 
-                props.open &&
-                css`
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: end;
-                    align-items: center;
-    
-                    position: absolute;
-                    top: 2.5em;
-                    right: 0;
+                background: rgba(255, 255, 255, .7);
+                font-size: 1.5em;
+                border-left: 1px solid #e8e8e8;
+                box-shadow: 0 0 10px #f3f1f1;
 
-                    height: 100vh;
-                    padding: 1em;
-    
-                    background: rgba(255, 255, 255, .7);
-                    font-size: 1.5em;
-                    border-left: 1px solid #e8e8e8;
-                    box-shadow: 0 0 10px #f3f1f1;
-
-                    transition: right .5s cubic-bezier(0.820, 0.085, 0.395, 0.895);
-                `
-            }
+                transition: max-width 0.5s, opacity 0.4s;
+            `
         }
-    `;
-    
+    }
+`;
+
+function NavBar() {
     const [open, setOpen] = useState(false);
     const user = useSelector(state => state.user)
     const history = useHistory();
@@ -167,6 +174,7 @@ function NavBar() {
                     <Button>COMMUNITY</Button>
                 </Link>
             </MenuBar>
+
             {/* login&register/logout */}
             <SubMenuBar>
                 {user.userData && !user.userData.isAuth
@@ -182,48 +190,45 @@ function NavBar() {
                             <Button>Sign Up</Button>
                         </Link>
                     </>
-                    : <Link onClick={logoutHandler}
-                        style={{color: 'black'}}
-                    >
-                        <Button>Log Out</Button>
-                    </Link>
+                    : <div>
+                        <Button onClick={logoutHandler}>Log Out</Button>
+                    </div>
                 }
             </SubMenuBar>
+            
             {/* drawer */}
             <DrawerButton onClick={() => setOpen(!open)}><FiMenu/></DrawerButton>
             <Drawer open={open}>
                 <Link to="/"
-                    style={{color: 'black'}}
+                    style={{color: 'black', width: '100%'}}
                 >
                     <Button>MAP</Button>
                 </Link>
-                <Link
-                    style={{color: 'black'}}
+                <Link to="/"
+                    style={{color: 'black', width: '100%'}}
                 >
                     <Button>COMMUNITY</Button>
                 </Link>
                 {user.userData && !user.userData.isAuth
                     ? <>
                         <Link to="/login"
-                            style={{color: 'black'}}
+                            style={{color: 'black', width: '100%'}}
                         >
                             <Button>Sign In</Button>
                         </Link>
                         <Link to="/register"
-                            style={{color: 'black'}}
+                            style={{color: 'black', width: '100%'}}
                         >
                             <Button>Sign Up</Button>
                         </Link>
                     </>
-                    : <Link onClick={logoutHandler}
-                        style={{color: 'black'}}
-                    >
-                        <Button>Log Out</Button>
-                    </Link>
+                    : <div style={{width: '100%'}}>
+                        <Button onClick={logoutHandler}>Log Out</Button>
+                    </div>
                 }
             </Drawer>
         </NavBox>
     )
 }
 
-export default NavBar
+export default NavBar;
