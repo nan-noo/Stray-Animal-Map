@@ -106,6 +106,7 @@ function RegisterPage(props) {
                                     value={values.email}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
+                                    autoComplete="email"
                                     className={
                                         errors.email && touched.email
                                             ? "text-input error"
@@ -123,6 +124,7 @@ function RegisterPage(props) {
                                     prefix={<UserOutlined style={{color: 'rgba(0,0,0,.25'}}/>}
                                     placeholder="Enter your Name"
                                     type="text"
+                                    autoComplete="username"
                                     value={values.name}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
@@ -142,6 +144,7 @@ function RegisterPage(props) {
                                     prefix={<UserOutlined style={{color: 'rgba(0,0,0,.25'}}/>}
                                     placeholder="Enter your Last Name"
                                     type="text"
+                                    autoComplete="family-name"
                                     value={values.lastName}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
@@ -165,6 +168,7 @@ function RegisterPage(props) {
                                     iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
+                                    autoComplete="current-password"
                                     className={
                                         errors.password && touched.password
                                             ? "text-input error"
@@ -185,6 +189,7 @@ function RegisterPage(props) {
                                     iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
+                                    autoComplete="new-password"
                                     className={
                                         errors.confirmPassword && touched.confirmPassword
                                             ? "text-input error"

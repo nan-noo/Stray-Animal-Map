@@ -71,6 +71,7 @@ function LoginPage(props) {
                                     placeholder="Enter your email"
                                     prefix={<MailOutlined style={{color: 'rgba(0,0,0,.25'}}/>}
                                     type="email"
+                                    autoComplete="email"
                                     value={values.email}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
@@ -93,6 +94,7 @@ function LoginPage(props) {
                                     iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
+                                    autoComplete="current-password"
                                     className={
                                         errors.password && touched.password
                                             ? "text-input error"

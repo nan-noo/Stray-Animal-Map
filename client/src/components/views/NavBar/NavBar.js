@@ -168,7 +168,7 @@ function NavBar() {
                 >
                     <Button>MAP</Button>
                 </Link>
-                <Link
+                <Link to="/"
                     style={{color: 'black'}}
                 >
                     <Button>COMMUNITY</Button>
