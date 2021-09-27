@@ -6,8 +6,9 @@ import moment from 'moment';
 import {useDispatch} from 'react-redux';
 
 import {registerUser} from '../../../_actions/user_actions';
+import { PrimaryButton, LinkButton } from '../../assets/Buttons';
 
-import {Button, Form, Input, Typography} from 'antd';
+import {Form, Input, Typography} from 'antd';
 import {UserOutlined, LockOutlined, MailOutlined, UnlockOutlined,
     EyeInvisibleOutlined, EyeTwoTone,
 } from '@ant-design/icons';
@@ -203,13 +204,11 @@ function RegisterPage(props) {
                             </Form.Item>
 
                             <Form.Item {...tailFormItemLayout}>
-                                <Button type="primary" onClick={handleSubmit} disabled={isSubmitting} style={{minWidth: '100%'}}>Register</Button>
+                                <PrimaryButton type="submit" onClick={handleSubmit} disabled={isSubmitting}>Register</PrimaryButton>
                                 <div style={{color: 'rgba(0,0,0,.50)', fontStyle: 'italic', marginTop: '5px'}}>
                                     Already have an account? 
                                     <Link to="/login">
-                                        <Button type="link" style={{
-                                            margin: '0', fontStyle: 'normal', padding: '8px'
-                                        }}>Login</Button>
+                                        <LinkButton>Login</LinkButton>
                                     </Link>
                                 </div>
                             </Form.Item>

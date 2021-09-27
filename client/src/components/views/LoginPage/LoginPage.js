@@ -5,8 +5,9 @@ import {Formik} from 'formik';
 import * as Yup from 'yup';
 
 import {loginUser} from '../../../_actions/user_actions';
+import { PrimaryButton, LinkButton } from '../../assets/Buttons';
 
-import {Button, Form, Input, Typography, Checkbox} from 'antd';
+import {Form, Input, Typography, Checkbox} from 'antd';
 import {MailOutlined, LockOutlined, EyeInvisibleOutlined, EyeTwoTone,} from '@ant-design/icons';
 
 const {Title} = Typography;
@@ -110,13 +111,11 @@ function LoginPage(props) {
                                 <Checkbox id="rememberMe" onChange={() => setRememberMe(!RememberMe)} checked={RememberMe} 
                                 style={{margin: '2px', color: 'rgba(0,0,0,.50)'}} 
                                 >remember Me</Checkbox>
-                                <Button type="primary" onClick={handleSubmit} disabled={isSubmitting} style={{minWidth: '100%'}}>Login</Button>
+                                <PrimaryButton type="submit" onClick={handleSubmit} disabled={isSubmitting}>Login</PrimaryButton>
                                 <div style={{color: 'rgba(0,0,0,.50)', fontStyle: 'italic', marginTop: '5px'}}>
                                     New here? 
                                     <Link to="/register">
-                                        <Button type="link" style={{
-                                            margin: '0', fontStyle: 'normal', padding: '8px'
-                                        }}>Register Now</Button>
+                                        <LinkButton>Register Now</LinkButton>
                                     </Link>
                                     
                                 </div>

@@ -4,6 +4,8 @@ import {useSelector} from 'react-redux';
 import styled, {css} from 'styled-components';
 import { Link, useHistory } from 'react-router-dom';
 import {FiMenu} from 'react-icons/fi';
+
+import { LineButton, DrawerButton } from '../../assets/Buttons';
 import {USER_SERVER} from '../../Config';
 
 const NavBox = styled.nav`
@@ -47,49 +49,6 @@ const SubMenuBar = styled.div`
     }
 `;
 
-const Button = styled.button`
-    width: 100%;
-    height: 100%;
-
-    background: white;
-    border: none;
-    outline: none;
-    font-size: 0.8rem;
-    font-weight: 500;
-    text-align: center;
-    padding: 0.8em 1.5em;
-    cursor: pointer;
-
-    &:hover{
-        color: #ec407a;
-        border-bottom: 1px solid #ec407a;
-    }
-    &:active{
-        background: rgba(0,0,0, .03);
-    }
-`;
-
-const DrawerButton = styled.button`
-    display: none;
-    @media only screen and (max-width: 48rem) {
-        display: inline-box;
-
-        text-align: center;
-        font-size: 0.8rem;
-        font-weight: 500;
-        border: none;
-        outline: none;
-        background: white;
-        cursor: pointer;
-
-        padding: 0.8em 1.3em;
-
-        &:hover{
-            color: #ec407a;
-        }
-        
-    }
-`;
 
 const Drawer = styled.div`
     z-index: 5;
@@ -166,12 +125,12 @@ function NavBar() {
                 <Link to="/"
                     style={{color: 'black', width: '100%'}}
                 >
-                    <Button>MAP</Button>
+                    <LineButton>MAP</LineButton>
                 </Link>
                 <Link to="/"
                     style={{color: 'black'}}
                 >
-                    <Button>COMMUNITY</Button>
+                    <LineButton>COMMUNITY</LineButton>
                 </Link>
             </MenuBar>
 
@@ -182,16 +141,16 @@ function NavBar() {
                         <Link to="/login"
                             style={{color: 'black'}}
                         >
-                            <Button>Sign In</Button>
+                            <LineButton>Sign In</LineButton>
                         </Link>
                         <Link to="/register"
                             style={{color: 'black'}}
                         >
-                            <Button>Sign Up</Button>
+                            <LineButton>Sign Up</LineButton>
                         </Link>
                     </>
                     : <div>
-                        <Button onClick={logoutHandler}>Log Out</Button>
+                        <LineButton onClick={logoutHandler}>Log Out</LineButton>
                     </div>
                 }
             </SubMenuBar>
@@ -202,28 +161,28 @@ function NavBar() {
                 <Link to="/"
                     style={{color: 'black', width: '100%'}}
                 >
-                    <Button>MAP</Button>
+                    <LineButton>MAP</LineButton>
                 </Link>
                 <Link to="/"
                     style={{color: 'black', width: '100%'}}
                 >
-                    <Button>COMMUNITY</Button>
+                    <LineButton>COMMUNITY</LineButton>
                 </Link>
                 {user.userData && !user.userData.isAuth
                     ? <>
                         <Link to="/login"
                             style={{color: 'black', width: '100%'}}
                         >
-                            <Button>Sign In</Button>
+                            <LineButton>Sign In</LineButton>
                         </Link>
                         <Link to="/register"
                             style={{color: 'black', width: '100%'}}
                         >
-                            <Button>Sign Up</Button>
+                            <LineButton>Sign Up</LineButton>
                         </Link>
                     </>
                     : <div style={{width: '100%'}}>
-                        <Button onClick={logoutHandler}>Log Out</Button>
+                        <LineButton onClick={logoutHandler}>Log Out</LineButton>
                     </div>
                 }
             </Drawer>
