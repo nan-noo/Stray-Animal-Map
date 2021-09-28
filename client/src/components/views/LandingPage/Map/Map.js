@@ -32,7 +32,7 @@ const SearchBox = styled.input`
 
 const containerStyle = {
     width: '100%',
-    height: '500px',
+    height: '100vh',
     flexGrow: 1
   };
   
@@ -41,7 +41,7 @@ const center = { // 서울
     lng: 126.584
 };
 
-{/* <div style={{
+/* <div style={{
                    
 
                    width: '100%',
@@ -54,7 +54,7 @@ const center = { // 서울
                            <p>{place.geometry.location.lng()}</p>
                        </>
                    }
-           </div> */}
+           </div> */
 
 function Map() {
     const [searchBox, setSearchBox] = useState(null);
@@ -99,7 +99,7 @@ function Map() {
                         <SearchBar>
                             <SearchBox
                                 type="text"
-                                placeholder="Customized your placeholder"
+                                placeholder="Search Location"
                             />
                         </SearchBar>
                         

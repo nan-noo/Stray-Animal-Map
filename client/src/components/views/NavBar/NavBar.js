@@ -49,14 +49,10 @@ const SubMenuBar = styled.div`
     }
 `;
 
-
 const Drawer = styled.div`
     z-index: 10;
-
     display: none;
-
     height: 100vh;
-    padding: 1em;
 
     background: rgba(255, 255, 255, .9);
     font-size: 1.5em;
@@ -66,16 +62,20 @@ const Drawer = styled.div`
     @media only screen and (max-width: 48rem) {
         display: flex;
         flex-direction: column;
-        
         align-items: center;
 
         position: absolute;
         top: 2.5em;
         right: 0;
 
+        padding: 1em 0;
         max-width: 0;
         opacity: 0;
-        transition: max-width 0.5s, opacity 0.4s;
+
+        ${LineButton}{
+            display: none;
+        }
+        transition: max-width 0.3s, opacity 0.3s, padding 0.2s;
 
         ${props => 
             props.open &&
@@ -90,7 +90,11 @@ const Drawer = styled.div`
                 border-left: 1px solid #e8e8e8;
                 box-shadow: 0 0 10px #f3f1f1;
 
-                transition: max-width 0.5s, opacity 0.4s;
+                transition: max-width 0.3s, opacity 0.3s, padding 0.3s;
+
+                ${LineButton}{
+                    display: initial;
+                }
             `
         }
     }
