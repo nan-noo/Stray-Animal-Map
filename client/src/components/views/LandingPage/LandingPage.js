@@ -1,15 +1,17 @@
 import React from 'react';
 import Map from './Map/Map';
+import GridMenu from './GridMenu';
 
 function LandingPage() {
     return (
         <div className="app"
         style={{
-            
-            width: '100%',
             height: '100vh',
+            display: 'flex',
+            flexDirection: 'row'
         }}>
             <Map/>
+            <GridMenu/>
         </div>
     );
 }

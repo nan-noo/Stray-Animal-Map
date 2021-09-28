@@ -14,8 +14,9 @@ const SearchBar = styled.div`
     justify-content: space-around;
     align-items: center;
     background: white;
-    z-index: 5;
+    z-index: 3;
 
+    box-shadow: 0 15px 10px -15px rgba(0,0,0,.2);
 `;
 
 const SearchBox = styled.input`
@@ -31,10 +32,10 @@ const SearchBox = styled.input`
 `;
 
 const containerStyle = {
-    width: '100%',
+    
     height: '100vh',
-    flexGrow: 1
-  };
+    flexGrow: 1,
+};
   
 const center = { // 서울
     lat: 37.336,

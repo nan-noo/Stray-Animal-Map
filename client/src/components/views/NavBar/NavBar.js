@@ -10,6 +10,7 @@ import {USER_SERVER} from '../../Config';
 
 const NavBox = styled.nav`
     width: 100%;
+    z-index: 5;
 
     display: flex;
     position: relative;
