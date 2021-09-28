@@ -39,7 +39,7 @@ export const LineButton = styled.button`
     width: 100%;
     height: 100%;
 
-    background: white;
+    background: transparent;
     border: none;
     outline: none;
     font-size: 0.8rem;

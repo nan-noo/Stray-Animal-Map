@@ -51,17 +51,17 @@ const SubMenuBar = styled.div`
 
 
 const Drawer = styled.div`
-    z-index: 5;
+    z-index: 10;
 
     display: none;
 
     height: 100vh;
     padding: 1em;
 
-    background: rgba(255, 255, 255, .7);
+    background: rgba(255, 255, 255, .9);
     font-size: 1.5em;
     border-left: 1px solid #e8e8e8;
-    box-shadow: 0 0 10px #f3f1f1;
+    box-shadow: 0 0 5px #f3f1f1;
 
     @media only screen and (max-width: 48rem) {
         display: flex;
@@ -97,7 +97,7 @@ const Drawer = styled.div`
 `;
 
 function NavBar() {
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(true);
     const user = useSelector(state => state.user)
     const history = useHistory();
 
