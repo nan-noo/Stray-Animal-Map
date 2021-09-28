@@ -1,17 +1,15 @@
-import React from 'react'
+import React from 'react';
+import Map from './Map/Map';
 
-function LandingPage(props) {
+function LandingPage() {
     return (
         <div className="app"
         style={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
+            
             width: '100%',
-            height: '100vh'
+            height: '100vh',
         }}>
-            <h2>Welcome!</h2>
+            <Map/>
         </div>
     );
 }
