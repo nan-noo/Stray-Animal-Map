@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import mapStyle from './style/mapStyle';
 import libraries from './libraries/libraries';
+import {GOOGLE_API_KEY} from '../../../../secret';
 
 const SearchBar = styled.div`
     position: absolute;
@@ -78,7 +79,7 @@ function Map() {
     return (
         <>
             <LoadScript
-                googleMapsApiKey="AIzaSyAEnuJzpvY1QP4JG1sMUb_qvsVqm7TjcJQ"
+                googleMapsApiKey={GOOGLE_API_KEY}
                 libraries={libraries}
             >   
                 {/* Search Bar */}
