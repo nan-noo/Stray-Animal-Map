@@ -1,9 +1,11 @@
 import React, {useState} from 'react';
 import { GoogleMap, LoadScript, InfoWindow, Marker, StandaloneSearchBox } from '@react-google-maps/api';
 import styled from 'styled-components';
+import {IoSearchOutline} from 'react-icons/io5';
 
 import mapStyle from './style/mapStyle';
 import libraries from './libraries/libraries';
+import CheckBox from '../../../assets/CheckBox';
 import {GOOGLE_API_KEY} from '../../../../secret';
 
 const SearchBar = styled.div`
@@ -12,7 +14,7 @@ const SearchBar = styled.div`
     height: 4rem;
     
     display: flex;
-    justify-content: space-around;
+    justify-content: start;
     align-items: center;
     background: white;
     z-index: 3;
@@ -33,11 +35,10 @@ const SearchBox = styled.input`
 `;
 
 const containerStyle = {
-    
     height: '100vh',
     flexGrow: 1,
 };
-  
+
 const center = { // 서울
     lat: 37.336,
     lng: 126.584
@@ -61,13 +62,14 @@ const center = { // 서울
 function Map() {
     const [searchBox, setSearchBox] = useState(null);
     const [place, setPlace] = useState({});
+    const [checked1, setChecked1] = useState(false);
+    const [checked2, setChecked2] = useState(false);
 
     const onLoad = infoWindow => {
         //console.log('infoWindow: ', infoWindow)
     }
 
     const onLoad2 = ref => {
-        //console.log(ref);
         setSearchBox(ref);
     }
 
@@ -82,9 +84,6 @@ function Map() {
                 googleMapsApiKey={GOOGLE_API_KEY}
                 libraries={libraries}
             >   
-                {/* Search Bar */}
-                
-                
                 {/* Map */}
                 <GoogleMap
                     mapContainerStyle={containerStyle}
@@ -94,19 +93,24 @@ function Map() {
                         styles: mapStyle
                     }}
                 >
+                    {/* Search Bar */}
                     <StandaloneSearchBox
                         onLoad={onLoad2}
                         onPlacesChanged={onPlacesChanged}
                     >
                         <SearchBar>
+                            <IoSearchOutline style={{margin: '0.9em', color: 'gray'}}/>
                             <SearchBox
                                 type="text"
                                 placeholder="Search Location"
                             />
+                            <div style={{display: 'flex', marginLeft: 'auto', marginRight: '1em'}}>
+                                <CheckBox checked={checked1} color='#ec407a' onChange={e => setChecked1(e.target.checked)}/>
+                                <CheckBox checked={checked2} color='#42a5f5' onChange={e => setChecked2(e.target.checked)}/>
+                            </div>
                         </SearchBar>
-                        
                     </StandaloneSearchBox>
-                   <InfoWindow
+                    <InfoWindow
                         onLoad={onLoad}
                         position={center}
                     >
@@ -119,9 +123,7 @@ function Map() {
                         position={center}
                     />
                 </GoogleMap>
-             </LoadScript>
-
-             {/* Right Menu */}
+            </LoadScript>
         </>   
     )
 }
