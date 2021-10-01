@@ -15,7 +15,7 @@ const NavBox = styled.nav`
     display: flex;
     position: relative;
 
-    box-shadow: 0 0 30px #f3f1f1;
+    box-shadow: 0 0 10px #f3f1f1;
     border-bottom: 1px solid #e8e8e8
 `;
 

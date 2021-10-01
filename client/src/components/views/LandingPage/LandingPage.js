@@ -1,6 +1,6 @@
 import React from 'react';
 import Map from './Map/Map';
-import GridMenu from './GridMenu';
+import GridMenu from './GridMenu/GridMenu';
 
 function LandingPage() {
     return (
