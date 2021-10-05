@@ -45,6 +45,8 @@ function Map() {
     const dispatch = useMapDispatch();
     const state = useMapState();
 
+    const {center, } = state;
+
     const [place, setPlace] = useState(null);
     const [checked1, setChecked1] = useState(false);
     const [checked2, setChecked2] = useState(false);
@@ -73,7 +75,7 @@ function Map() {
                 {/* Map */}
                 <GoogleMap
                     mapContainerStyle={containerStyle}
-                    center={state.center}
+                    center={center}
                     zoom={12}
                     options={{
                         styles: mapStyle
@@ -98,7 +100,7 @@ function Map() {
                     </StandaloneSearchBox>
                     <InfoWindow
                         onLoad={onInfoWindowLoad}
-                        position={state.center}
+                        position={center}
                     >
                         <div style={{background: 'white'}}>
                             {place &&
@@ -111,7 +113,7 @@ function Map() {
                     </InfoWindow> 
                     <Marker
                         icon="https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"
-                        position={state.center}
+                        position={center}
                     />
                 </GoogleMap>
             </LoadScript>
