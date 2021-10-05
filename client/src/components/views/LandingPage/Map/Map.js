@@ -7,6 +7,7 @@ import mapStyle from './style/mapStyle';
 import libraries from './libraries/libraries';
 import CheckBox from '../../../assets/CheckBox';
 import {GOOGLE_API_KEY} from '../../../../secret';
+import { useMapState, useMapDispatch } from '../../../../context/MapContext';
 
 const SearchBar = styled.div`
     position: absolute;
@@ -39,43 +40,28 @@ const containerStyle = {
     flexGrow: 1,
 };
 
-const center = { // 서울
-    lat: 37.336,
-    lng: 126.584
-};
-
-/* <div style={{
-                   
-
-                   width: '100%',
-                   height: '1rem',
-                   textAlign: 'center'
-               }}>
-                   {place?.geometry &&
-                       <>
-                           <p>{place.geometry.location.lat()}</p> 
-                           <p>{place.geometry.location.lng()}</p>
-                       </>
-                   }
-           </div> */
-
 function Map() {
     const [searchBox, setSearchBox] = useState(null);
-    const [place, setPlace] = useState({});
+    const dispatch = useMapDispatch();
+    const state = useMapState();
+
+    const [place, setPlace] = useState(null);
     const [checked1, setChecked1] = useState(false);
     const [checked2, setChecked2] = useState(false);
 
-    const onLoad = infoWindow => {
-        //console.log('infoWindow: ', infoWindow)
+    const onInfoWindowLoad = infoWindow => {
+        console.log('infoWindow: ', infoWindow)
     }
 
-    const onLoad2 = ref => {
+    const onSearchBoxLoad = ref => {
         setSearchBox(ref);
     }
 
     const onPlacesChanged = () => {
-        console.log(searchBox.getPlaces()[0]);
-        setPlace(searchBox.getPlaces()[0]);
+        const inputPlace = searchBox.getPlaces()[0].geometry.location;
+        
+        setPlace(inputPlace);
+        dispatch({type: 'CHANGE_CENTER', lat: inputPlace.lat(), lng: inputPlace.lng()})
     }
 
     return (
@@ -87,15 +73,15 @@ function Map() {
                 {/* Map */}
                 <GoogleMap
                     mapContainerStyle={containerStyle}
-                    center={center}
-                    zoom={10}
+                    center={state.center}
+                    zoom={12}
                     options={{
                         styles: mapStyle
                     }}
                 >
                     {/* Search Bar */}
                     <StandaloneSearchBox
-                        onLoad={onLoad2}
+                        onLoad={onSearchBoxLoad}
                         onPlacesChanged={onPlacesChanged}
                     >
                         <SearchBar>
@@ -111,16 +97,21 @@ function Map() {
                         </SearchBar>
                     </StandaloneSearchBox>
                     <InfoWindow
-                        onLoad={onLoad}
-                        position={center}
+                        onLoad={onInfoWindowLoad}
+                        position={state.center}
                     >
                         <div style={{background: 'white'}}>
-                            <h1>InfoWindow</h1>
+                            {place &&
+                                <>
+                                    <p>{place.lat()}</p> 
+                                    <p>{place.lng()}</p>
+                                </>
+                            }
                         </div>
                     </InfoWindow> 
                     <Marker
                         icon="https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"
-                        position={center}
+                        position={state.center}
                     />
                 </GoogleMap>
             </LoadScript>
