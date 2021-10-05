@@ -12,7 +12,10 @@ const OnOffButton = styled.button`
     font-size: .9rem;
 
     border: 1px solid rgba(0,0,0,.1);
+    border-top: none;
+    border-right: none;
     border-radius: 5px 0 0 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,.1);
     background: white;
     cursor: pointer;
 
