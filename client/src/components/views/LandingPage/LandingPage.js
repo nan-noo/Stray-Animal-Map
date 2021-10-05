@@ -9,6 +9,7 @@ function LandingPage() {
             <div className="app"
             style={{
                 height: '100vh',
+                position: 'relative',
                 display: 'flex',
                 flexDirection: 'row'
             }}>
