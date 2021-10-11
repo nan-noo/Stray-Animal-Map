@@ -2,12 +2,15 @@ import React, {useState} from 'react';
 import { GoogleMap, LoadScript, InfoWindow, Marker, StandaloneSearchBox } from '@react-google-maps/api';
 import styled from 'styled-components';
 import {IoSearchOutline} from 'react-icons/io5';
+//import Geocode from "react-geocode";
 
 import mapStyle from './style/mapStyle';
 import libraries from './libraries/libraries';
 import CheckBox from '../../../assets/CheckBox';
 import {GOOGLE_API_KEY} from '../../../../secret';
 import { useMapState, useMapDispatch } from '../../../../context/MapContext';
+import findIcon from '../../../assets/images/findIcon.svg';
+import lostIcon from '../../../assets/images/lostIcon.svg';
 
 const SearchBar = styled.div`
     position: absolute;
@@ -40,10 +43,24 @@ const containerStyle = {
     flexGrow: 1,
 };
 
+// set Google Maps Geocoding API for purposes of quota management. Its optional but recommended.
+// Geocode.setApiKey(GOOGLE_API_KEY);
+
+// // Get latitude & longitude from address.
+// Geocode.fromAddress("Eiffel Tower").then(
+//     (response) => {
+//       const { lat, lng } = response.results[0].geometry.location;
+//       console.log(lat, lng);
+//     },
+//     (error) => {
+//       console.error(error);
+//     }
+//   );
+
 function Map() {
     const [searchBox, setSearchBox] = useState(null);
     const dispatch = useMapDispatch();
-    const {center, } = useMapState();
+    const {center, items} = useMapState();
 
     const [place, setPlace] = useState(null);
     const [checked1, setChecked1] = useState(false);
@@ -91,6 +108,8 @@ function Map() {
                             </div>
                         </SearchBar>
                     </StandaloneSearchBox>
+
+                    {/* info items */}
                     <InfoWindow
                         onLoad={onInfoWindowLoad}
                         position={center}
@@ -104,10 +123,18 @@ function Map() {
                             }
                         </div>
                     </InfoWindow> 
-                    <Marker
-                        icon="https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"
-                        position={center}
-                    />
+                    
+                    {items.map(item => {
+                        return item.type === 0 // find
+                            ? <Marker 
+                                icon={{ url: findIcon }}
+                                position={item.latLng}
+                            />
+                            : <Marker 
+                                icon={{ url: lostIcon }}
+                                position={item.latLng}
+                            />
+                    })}
                 </GoogleMap>
             </LoadScript>
         </>   

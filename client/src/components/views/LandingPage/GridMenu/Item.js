@@ -27,17 +27,20 @@ const TextBox = styled.div`
     padding: 0.9em;
 `;
 
-function Item({src, title, desc}) {
+function Item({item}) {
+    const {src, title, location, type} = item;
+    const color = type === 0 ? '#ec407a' : '#42a5f5';
+
     return (
         <ItemBox>
             {src 
                 ? <Image src={src}/>
-                : <FaDog style={{width: '20%', margin: '0.9em', color: '#ec407a'}}/>
+                : <FaDog style={{width: '20%', margin: '0.9em', color}}/>
             }
             
             <TextBox>
                 <h2>{title}</h2>
-                <p>{desc}</p>
+                <p>{location}</p>
             </TextBox>
         </ItemBox>
     )

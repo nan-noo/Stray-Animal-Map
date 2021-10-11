@@ -9,14 +9,18 @@ const initialMap = {
         {
             id: 1,
             img: null,
-            title: '1',
-            desc: '1-1'
+            title: '강아지 발견했어요',
+            type: 0, // find
+            location: '서울특별시 망원1동 한강공원입구',
+            latLng: {lat: 37.5560625, lng: 126.8989498}
         },
         {
             id: 2,
             img: null,
-            title: '2',
-            desc: '2-1'
+            title: '강아지 잃어버렸어요',
+            type: 1, // lost
+            location: '대한민국 서울특별시 강남',
+            latLng: {lat: 37.5172363, lng: 127.0473248}
         },
     ]
 };

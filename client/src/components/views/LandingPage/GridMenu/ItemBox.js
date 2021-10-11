@@ -15,7 +15,7 @@ function ItemBox() {
     return (
         <Container>
             {items.map(item => (
-                <Item key={item.id} src={item.img} title={item.title} desc={item.desc}/>
+                <Item key={item.id} item={item}/>
             ))}
         </Container>
     )
