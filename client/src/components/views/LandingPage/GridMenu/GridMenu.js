@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import styled, {css} from 'styled-components';
 import {AiOutlinePlus} from 'react-icons/ai';
 
-import ItemBox from './ItemBox';
+import Items from './Items';
 import { useMapState } from '../../../../context/MapContext';
 import {SecondaryButton} from '../../../assets/Buttons';
 
@@ -95,7 +95,7 @@ function GridMenu() {
                     <div>found {items.length} results</div>
                     <SecondaryButton><AiOutlinePlus/>Add</SecondaryButton>
                 </GridBar>
-                <ItemBox/>
+                <Items/>
             </GridBox>
         </>
     )

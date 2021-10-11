@@ -2,14 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { useMapState } from '../../../context/MapContext';
-import PostBox from './PostBox';
+import PostItem from './PostItem';
 
 const PostsBox = styled.div`
-    width: 50%;
+    display: flex;
+
     height: 100%;
     margin: 3em 0;
 
-    overflow-y: scroll;
 `;
 
 function Posts() {
@@ -18,7 +18,7 @@ function Posts() {
     return (
         <PostsBox>
             {items.map(item => (
-                <PostBox key={item.id} item={item}/>
+                <PostItem key={item.id} item={item}/>
             ))}
         </PostsBox>
     )

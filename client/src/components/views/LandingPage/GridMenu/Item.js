@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import {FaDog} from 'react-icons/fa';
 
@@ -12,6 +13,13 @@ const ItemBox = styled.div`
 
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0,0,0,.1);
+    color: black;
+
+    &:hover{
+        background: #fafafa;
+    }
+
+    transition: 0.125s all ease-in;
 `;
 
 const Image = styled.img`
@@ -28,22 +36,24 @@ const TextBox = styled.div`
 `;
 
 function Item({item}) {
-    const {src, title, location, type} = item;
+    const {id, src, title, location, type} = item;
     const color = type === 0 ? '#ec407a' : '#42a5f5';
 
     return (
-        <ItemBox>
-            {src 
-                ? <Image src={src}/>
-                : <FaDog style={{width: '20%', margin: '0.9em', color}}/>
-            }
-            
-            <TextBox>
-                <h2>{title}</h2>
-                <p>{location}</p>
-            </TextBox>
-        </ItemBox>
+        <Link to={`/community/${id}`}>
+            <ItemBox>
+                {src 
+                    ? <Image src={src}/>
+                    : <FaDog style={{width: '20%', height: '100%', margin: '0.9em', color}}/>
+                }
+                
+                <TextBox>
+                    <h2>{title}</h2>
+                    <p>{location}</p>
+                </TextBox>
+            </ItemBox>
+        </Link>
     )
 }
 
-export default Item;
+export default React.memo(Item);

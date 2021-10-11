@@ -9,7 +9,7 @@ const Container = styled.div`
     overflow-y: scroll;
 `;
 
-function ItemBox() {
+function Items() {
     const {items, } = useMapState();
 
     return (
@@ -21,4 +21,4 @@ function ItemBox() {
     )
 }
 
-export default ItemBox
+export default Items

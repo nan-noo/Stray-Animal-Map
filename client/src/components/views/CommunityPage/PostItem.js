@@ -14,6 +14,13 @@ const ItemBox = styled.div`
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0,0,0,.1);
     background: white;
+    color: black;
+
+    &:hover{
+        background: #fafafa;
+    }
+
+    transition: 0.125s all ease-in;
 `;
 
 const Image = styled.img`
@@ -33,7 +40,7 @@ const TextBox = styled.div`
     padding: 0.9em;
 `;
 
-function PostBox({item}) {
+function PostItem({item}) {
     const {id, src, title, location, type} = item;
     const color = type === 0 ? '#ec407a' : '#42a5f5';
     
@@ -52,7 +59,7 @@ function PostBox({item}) {
                 </TextBox>
             </ItemBox>
         </Link> 
-    )
+    );
 }
 
-export default PostBox
+export default React.memo(PostItem);
