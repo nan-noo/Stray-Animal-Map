@@ -43,28 +43,21 @@ const containerStyle = {
 function Map() {
     const [searchBox, setSearchBox] = useState(null);
     const dispatch = useMapDispatch();
-    const state = useMapState();
-
-    const {center, } = state;
+    const {center, } = useMapState();
 
     const [place, setPlace] = useState(null);
     const [checked1, setChecked1] = useState(false);
     const [checked2, setChecked2] = useState(false);
 
-    const onInfoWindowLoad = infoWindow => {
-        console.log('infoWindow: ', infoWindow)
-    }
 
-    const onSearchBoxLoad = ref => {
-        setSearchBox(ref);
-    }
-
+    const onInfoWindowLoad = infoWindow => { console.log('infoWindow: ', infoWindow); };
+    const onSearchBoxLoad = ref => { setSearchBox(ref); };
     const onPlacesChanged = () => {
         const inputPlace = searchBox.getPlaces()[0].geometry.location;
         
         setPlace(inputPlace);
-        dispatch({type: 'CHANGE_CENTER', lat: inputPlace.lat(), lng: inputPlace.lng()})
-    }
+        dispatch({type: 'UPDATE_CENTER', lat: inputPlace.lat(), lng: inputPlace.lng()})
+    };
 
     return (
         <>
@@ -118,7 +111,7 @@ function Map() {
                 </GoogleMap>
             </LoadScript>
         </>   
-    )
+    );
 }
 
 export default Map;

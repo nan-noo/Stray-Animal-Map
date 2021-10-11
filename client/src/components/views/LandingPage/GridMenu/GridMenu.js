@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import styled, {css} from 'styled-components';
 
 import ItemBox from './ItemBox';
+import { useMapNextId, useMapState } from '../../../../context/MapContext';
 
 const OnOffButton = styled.button`
     position: absolute;
@@ -15,7 +16,7 @@ const OnOffButton = styled.button`
     border-top: none;
     border-right: none;
     border-radius: 5px 0 0 5px;
-    box-shadow: 0 0 10px rgba(0,0,0,.1);
+    box-shadow: -15px 15px 10px -15px rgba(0,0,0,.1);
     background: white;
     cursor: pointer;
 
@@ -25,7 +26,7 @@ const OnOffButton = styled.button`
     &:active{
         background: #eeeeee;
     }
-    transition: 0.125s all ease-out;
+    transition: 0.07s all ease-out;
 
     @media only screen and (max-width: 48rem) {
         display: none;
@@ -35,7 +36,7 @@ const OnOffButton = styled.button`
         props.close &&
         css`
             right: 0%;
-            transition: 0.125s all ease-out;
+            transition: 0.07s all ease-out;
         `
     }
 `;
@@ -64,13 +65,13 @@ const GridBox = styled.div`
         display: none;
     }
 
-    transition: 0.1s all ease-out;
+    transition: 0.07s all ease-out;
 
     ${props => 
         props.close &&
         css`
             width: 0%;
-            transition: 0.1s all ease-out;
+            transition: 0.07s all ease-out;
             ${GridBar}{
                 display: none;
             }
@@ -80,6 +81,7 @@ const GridBox = styled.div`
 
 function GridMenu() {
     const [close, setClose] = useState(false);
+    const { items } = useMapState();
 
     return (
         <>
@@ -88,7 +90,7 @@ function GridMenu() {
             </OnOffButton>
             <GridBox close={close}>
                 <GridBar>
-                    found 10 results
+                    found {items.length} results
                 </GridBar>
                 <ItemBox/>
             </GridBox>

@@ -102,7 +102,7 @@ const Drawer = styled.div`
 `;
 
 function NavBar() {
-    const [open, setOpen] = useState(true);
+    const [open, setOpen] = useState(false);
     const user = useSelector(state => state.user)
     const history = useHistory();
 

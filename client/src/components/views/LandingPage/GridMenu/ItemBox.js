@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { useMapState } from '../../../../context/MapContext';
 import Item from './Item';
 
 const Container = styled.div`
@@ -9,17 +10,13 @@ const Container = styled.div`
 `;
 
 function ItemBox() {
+    const {items, } = useMapState();
+
     return (
         <Container>
-            <Item title="1" desc="1-1"/>
-            <Item title="1" desc="1-1"/>
-            <Item title="1" desc="1-1"/>
-            <Item title="1" desc="1-1"/>
-            <Item title="1" desc="1-1"/>
-            <Item title="1" desc="1-1"/>
-            <Item title="1" desc="1-1"/>
-            <Item title="1" desc="1-1"/>
-            <Item title="1" desc="1-1"/>
+            {items.map(item => (
+                <Item key={item.id} src={item.img} title={item.title} desc={item.desc}/>
+            ))}
         </Container>
     )
 }

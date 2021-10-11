@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import {FaDog} from 'react-icons/fa';
 
 const ItemBox = styled.div`
     display: flex;
@@ -29,7 +30,11 @@ const TextBox = styled.div`
 function Item({src, title, desc}) {
     return (
         <ItemBox>
-            <Image src={src}/>
+            {src 
+                ? <Image src={src}/>
+                : <FaDog style={{width: '20%', margin: '0.9em', color: '#ec407a'}}/>
+            }
+            
             <TextBox>
                 <h2>{title}</h2>
                 <p>{desc}</p>

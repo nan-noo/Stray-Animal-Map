@@ -25,6 +25,7 @@ export const LinkButton = styled.button`
 
     border: none;
     outline: none;
+    cursor: pointer;
 
     &:hover{
         color: #ff77a9
