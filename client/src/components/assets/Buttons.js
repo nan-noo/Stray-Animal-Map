@@ -19,6 +19,27 @@ export const PrimaryButton = styled.button`
     transition: 0.125s all ease-in;
 `;
 
+export const SecondaryButton = styled.button`
+    height: 100%;
+
+    padding: 0.2em 0.9em;
+
+    background: white;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+
+    &:hover{
+        color: #ec407a;
+        border: 1px solid #ec407a;
+    }
+    &:active{
+        color: white;
+        background: #ec407a;
+    }
+    transition: 0.125s all ease-in;
+`;
+
 export const LinkButton = styled.button`
     background: white;
     color: #ec407a;

@@ -1,8 +1,10 @@
 import React, {useState} from 'react';
 import styled, {css} from 'styled-components';
+import {AiOutlinePlus} from 'react-icons/ai';
 
 import ItemBox from './ItemBox';
-import { useMapNextId, useMapState } from '../../../../context/MapContext';
+import { useMapState } from '../../../../context/MapContext';
+import {SecondaryButton} from '../../../assets/Buttons';
 
 const OnOffButton = styled.button`
     position: absolute;
@@ -46,7 +48,7 @@ const GridBar = styled.div`
     height: 4rem;
     
     display: flex;
-    justify-content: end;
+    justify-content: space-between;
     align-items: center;
 
     padding: 0.9em 1em;
@@ -90,7 +92,8 @@ function GridMenu() {
             </OnOffButton>
             <GridBox close={close}>
                 <GridBar>
-                    found {items.length} results
+                    <div>found {items.length} results</div>
+                    <SecondaryButton><AiOutlinePlus/>Add</SecondaryButton>
                 </GridBar>
                 <ItemBox/>
             </GridBox>
