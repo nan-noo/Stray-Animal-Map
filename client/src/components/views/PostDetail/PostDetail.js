@@ -24,7 +24,7 @@ const PostBox = styled.div`
 const BoxHeader = styled.div`
     display: flex;
     width: 100%;
-    height: 30%;
+    
     padding: 0.9em;
 
     border-bottom: 1px solid #eeeeee;
@@ -38,6 +38,7 @@ const Image = styled.img`
 const TextBox = styled.div`
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
     flex-grow: 1;
 
     padding: 0.9em;

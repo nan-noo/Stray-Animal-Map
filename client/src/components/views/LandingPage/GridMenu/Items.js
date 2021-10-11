@@ -7,6 +7,8 @@ import Item from './Item';
 const Container = styled.div`
     height: calc(100% - 4rem);
     overflow-y: scroll;
+
+    background: #fafafa;
 `;
 
 function Items() {
