@@ -10,7 +10,6 @@ const userReducer = function(previousState = {}, action){
             return {...previousState, userData: action.payload};
         case LOGOUT_USER:
             return {...previousState, logout: action.payload};
-                  
         default:
             return previousState;
             

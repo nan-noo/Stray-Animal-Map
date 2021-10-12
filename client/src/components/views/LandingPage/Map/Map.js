@@ -127,10 +127,12 @@ function Map() {
                     {items.map(item => {
                         return item.type === 0 // find
                             ? <Marker 
+                                key={item.id}
                                 icon={{ url: findIcon }}
                                 position={item.latLng}
                             />
                             : <Marker 
+                                key={item.id}
                                 icon={{ url: lostIcon }}
                                 position={item.latLng}
                             />

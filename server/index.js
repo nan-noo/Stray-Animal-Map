@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 
@@ -9,15 +10,12 @@ const userRouter = require('./routes/users');
 const port = 5000;
 const app = express();
 
-// application/json
+app.use(cors()); // to avoid CORS error
 app.use(express.json());
 app.use(cookieParser());
-// application/x-www-form-urlencoded
 app.use(express.urlencoded({extended: true}));
 
-// connect to DB
 mongoose.connect( config.mongoURI, {
-    // error 방지
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,

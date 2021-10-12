@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../axios';
 import {USER_SERVER} from '../components/Config';
 import {LOGIN_USER, REGISTER_USER, AUTH_USER, LOGOUT_USER} from './types';
 
