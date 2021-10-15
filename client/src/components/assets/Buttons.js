@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const PrimaryButton = styled.button`
-    height: 100%;
     width: 100%;
 
     background: #ec407a;
