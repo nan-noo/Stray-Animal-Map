@@ -12,6 +12,7 @@ const initialMap = {
             title: '강아지 발견했어요',
             type: 0, // find
             location: '서울특별시 망원1동 한강공원입구',
+            content: 'fkfkfk',
             latLng: {lat: 37.5560625, lng: 126.8989498}
         },
         {
@@ -20,6 +21,7 @@ const initialMap = {
             title: '강아지 잃어버렸어요',
             type: 1, // lost
             location: '대한민국 서울특별시 강남',
+            content: 'asfdas',
             latLng: {lat: 37.5172363, lng: 127.0473248}
         },
     ]
