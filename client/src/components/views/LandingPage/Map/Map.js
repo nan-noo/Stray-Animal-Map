@@ -63,8 +63,8 @@ function Map() {
     const {center, items} = useMapState();
 
     const [place, setPlace] = useState(null);
-    const [checked1, setChecked1] = useState(false);
-    const [checked2, setChecked2] = useState(false);
+    const [checked1, setChecked1] = useState(true);
+    const [checked2, setChecked2] = useState(true);
 
 
     const onInfoWindowLoad = infoWindow => { console.log('infoWindow: ', infoWindow); };
@@ -103,8 +103,8 @@ function Map() {
                                 placeholder="Search Location"
                             />
                             <div style={{display: 'flex', marginLeft: 'auto', marginRight: '1em'}}>
-                                <CheckBox checked={checked1} color='#ec407a' onChange={e => setChecked1(e.target.checked)}/>
-                                <CheckBox checked={checked2} color='#42a5f5' onChange={e => setChecked2(e.target.checked)}/>
+                                <CheckBox text="found" checked={checked1} color='#ec407a' onChange={e => setChecked1(e.target.checked)}/>
+                                <CheckBox text="lost" checked={checked2} color='#42a5f5' onChange={e => setChecked2(e.target.checked)}/>
                             </div>
                         </SearchBar>
                     </StandaloneSearchBox>

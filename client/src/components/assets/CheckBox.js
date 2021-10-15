@@ -5,12 +5,12 @@ import {RiCheckboxBlankCircleFill, RiCheckboxBlankCircleLine} from 'react-icons/
 const CheckBoxBox = styled.div`
     display: flex;
     align-items: center;
-
-    margin: 0.9em;
+    margin: 0 0.5em;
 `;
 
 const CheckLabel = styled.label`
     cursor: pointer;
+    display: flex;
 `;
 
 const CheckInput = styled.input`
@@ -18,19 +18,27 @@ const CheckInput = styled.input`
     height: 0;
     position: absolute;
     opacity: 0;
+    cursor: pointer;
 `;
 
-function CheckBox({checked, color, ...rest}) {
+const CheckMark = styled.div`
+    height: 1.5em;
+    width: 1.5em;
+    background: ${props => props.checked ? props.color: '#eeeeee'};
+    border-radius: 50%;
+
+    &:hover{
+        opacity: 0.8;
+    }
+`;
+
+function CheckBox({checked, color, text, ...rest}) {
     return (
         <CheckBoxBox>
             <CheckLabel>
+                {text} &nbsp;
                 <CheckInput type="checkbox" checked={checked} {...rest}/>
-                <div>
-                    {checked 
-                        ? <RiCheckboxBlankCircleFill style={{color, fontSize: '1.1rem'}}/>
-                        : <RiCheckboxBlankCircleLine style={{color, fontSize: '1.1rem'}}/>
-                    }
-                </div>
+                <CheckMark checked={checked} color={color}/>
             </CheckLabel>
         </CheckBoxBox>
     )
