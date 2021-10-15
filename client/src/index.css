@@ -1,43 +1,44 @@
-@import url('https://fonts.googleapis.com/css2?family=Gemunu+Libre&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Gemunu+Libre&display=swap");
 
-*{
-  font-family: 'Gemunu Libre', sans-serif;
+* {
+  font-family: "Gemunu Libre", sans-serif;
 }
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
-.app{
+.app {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  background: #fafafa;
 }
 
-input.error{
+input.error {
   border-color: red;
 }
 
-.input-feedback{
+.input-feedback {
   color: red;
   height: 5px;
   font-size: 2px;
   text-align: end;
 }
 
-.input-no-feedback{
+.input-no-feedback {
   visibility: hidden;
   height: 5px;
   font-size: 2px;

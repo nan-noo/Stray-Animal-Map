@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { Link } from 'react-router-dom';
 import styled, {css} from 'styled-components';
 import {AiOutlinePlus} from 'react-icons/ai';
 
@@ -93,7 +94,9 @@ function GridMenu() {
             <GridBox close={close}>
                 <GridBar>
                     <div>found {items.length} results</div>
-                    <SecondaryButton><AiOutlinePlus/>Add</SecondaryButton>
+                    <Link to="/upload" style={{color: 'black'}}>
+                        <SecondaryButton><AiOutlinePlus/>Add</SecondaryButton>
+                    </Link>
                 </GridBar>
                 <Items/>
             </GridBox>
