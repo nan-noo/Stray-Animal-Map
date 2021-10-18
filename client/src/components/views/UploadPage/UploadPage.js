@@ -11,9 +11,9 @@ const UploadBox = styled.div`
     align-items: center;
 
     width: 80%;
-    height: 60%;
+    height: 70%;
     margint: 3em 0;
-    padding: 1em 2em;
+    padding: 1em 2em 2em;
 
     background: white;
     border: 1px solid rgba(0,0,0,.1);
@@ -23,6 +23,9 @@ const UploadBox = styled.div`
 
 const FormBox = styled.form`
     width: 100%;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
 `;
 
 const InputBox = styled.input`
@@ -36,13 +39,25 @@ const InputBox = styled.input`
     background: #fafafa;
 `;
 
+const ContentArea = styled.textarea`
+    width: 100%;
+    flex-grow: 1;
+    margin: 0.5em 0 1em;
+    padding: 0.9em;
+    font-size: 0.9rem;
+
+    border-radius: 5px;
+    border: 1px solid #eeeeee;
+    background: #fafafa;
+`;
+
 function UploadPage() {
     const [inputs, setInputs] = useState({
-        title: '', img: '', content: '', location: '', type: 0,
+        title: '', img: '', content: '', location: ''
     });
-    const {title, img, content, location, type} = inputs;
+    const {title, img, content, location} = inputs;
 
-    const [checked, setChecked] = useState('');
+    const [checked, setChecked] = useState(''); // 'find' or 'lost'
 
     // postId, latLng, writer도 같이 업로드
     const onSubmit = e => {
@@ -63,20 +78,19 @@ function UploadPage() {
         <div className="app">
             <UploadBox>
                 <h2>Upload Post</h2>
-                {/* input: title, img, content, location, type */}
+                {/* title, img, content, location, type */}
                 <FormBox onSubmit={onSubmit}>
-                    <InputBox type="text" placeholder="제목을 작성해주세요: 글자수제한(50)" 
+                    <InputBox type="text" placeholder="제목을 작성해주세요: 글자수제한(50)"
                         name="title" value={title} onChange={onInputChange}
                     />
                     <InputBox type="text" placeholder="위치를 작성해주세요" 
                         name="location" value={location} onChange={onInputChange}
                     />
                     <RadioButton checked={checked} setChecked={onCheckedHandler}/>
+                    <ContentArea/>
                     <PrimaryButton>upload</PrimaryButton>
                 </FormBox>
-
-            </UploadBox>
-            
+            </UploadBox>  
         </div>
     )
 }
