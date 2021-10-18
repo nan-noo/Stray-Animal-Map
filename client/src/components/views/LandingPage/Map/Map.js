@@ -123,20 +123,22 @@ function Map() {
                             }
                         </div>
                     </InfoWindow> 
-                    
-                    {items.map(item => {
-                        return item.type === 0 // find
-                            ? <Marker 
+                    {checked1 && items.map(item => (
+                        item.type === 0
+                        && <Marker 
                                 key={item.id}
                                 icon={{ url: findIcon }}
                                 position={item.latLng}
                             />
-                            : <Marker 
+                    ))}
+                    {checked2 && items.map(item => (
+                        item.type === 1
+                        && <Marker 
                                 key={item.id}
                                 icon={{ url: lostIcon }}
                                 position={item.latLng}
                             />
-                    })}
+                    ))}
                 </GoogleMap>
             </LoadScript>
         </>   
