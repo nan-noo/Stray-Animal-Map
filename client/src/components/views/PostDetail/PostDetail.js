@@ -51,6 +51,7 @@ const BoxBody = styled.p`
     padding: 0.9em;
     font-size: 1rem;
     flex-grow: 1;
+    overflow: auto;
 `;
 
 function PostDetail() {

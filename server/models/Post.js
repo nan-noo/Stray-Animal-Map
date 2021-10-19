@@ -5,10 +5,6 @@ const postSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
-    postId: {
-        type: Number,
-        unique: 1,
-    },
     title: {
         type: String,
         maxlength: 50,

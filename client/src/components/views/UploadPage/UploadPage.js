@@ -1,10 +1,12 @@
 import React, {useState} from 'react';
 import {useSelector} from 'react-redux';
 import {useHistory} from 'react-router-dom';
+import Geocode from "react-geocode";
 import styled from 'styled-components';
 import axios from '../../../axios';
 
 import {POST_SERVER} from '../../Config';
+import {GOOGLE_API_KEY} from '../../../secret';
 
 import { PrimaryButton } from '../../assets/Buttons';
 import RadioButton from '../../assets/RadioButton';
@@ -55,6 +57,20 @@ const ContentArea = styled.textarea`
     background: #fafafa;
 `;
 
+async function getGeocode(location){
+    Geocode.setApiKey(GOOGLE_API_KEY);
+    Geocode.setLanguage("ko");
+    Geocode.setRegion("kr");
+    Geocode.setLocationType("ROOFTOP"); // most accurate result
+    try{
+        const response = await Geocode.fromAddress(location);
+        return response.results[0].geometry.location;
+    }
+    catch{
+        alert('주소를 다시 입력해주세요');
+    }
+}
+
 function UploadPage() {
     const history = useHistory();
     const user = useSelector(state => state.user);
@@ -62,14 +78,19 @@ function UploadPage() {
         title: '', img: '', content: '', location: '',
     });
     const {title, img, content, location} = inputs;
-    const [type, setType] = useState(''); // 'find' or 'lost'
+    const [type, setType] = useState('find');
 
     const onSubmit = async e => {
         e.preventDefault();
 
-        const data = { ...inputs, type, writer: user.userData._id, latLng: {lat: 37.5172363, lng: 127.0473248}}
-        const response = await axios.post(`${POST_SERVER}/uploadPost`, data);
-        response.data.success && history.push('/');
+        if(location && title){
+            const data = { ...inputs, type, writer: user.userData._id, latLng: await getGeocode(location)}
+            const response = await axios.post(`${POST_SERVER}/uploadPost`, data);
+            response.data.success ? history.push('/') : alert('Failed to upload post');
+        }
+        else{
+            alert('작성하지 않은 항목이 있습니다.');
+        }
     };
 
     const onInputChange = e => {
@@ -94,7 +115,7 @@ function UploadPage() {
                         name="location" value={location} onChange={onInputChange}
                     />
                     <RadioButton checked={type} setChecked={onCheckedHandler}/>
-                    <ContentArea name="content" value={content} onChange={onInputChange} placeholder="내용을 작성해주세요"/>
+                    <ContentArea name="content" value={content} onChange={onInputChange} placeholder="내용을 작성해주세요" maxLength="2000"/>
                     <PrimaryButton>upload</PrimaryButton>
                 </FormBox>
             </UploadBox>  

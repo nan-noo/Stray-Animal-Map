@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import { GoogleMap, LoadScript, InfoWindow, Marker, StandaloneSearchBox } from '@react-google-maps/api';
 import styled from 'styled-components';
 import {IoSearchOutline} from 'react-icons/io5';
-//import Geocode from "react-geocode";
 
 import mapStyle from './style/mapStyle';
 import libraries from './libraries/libraries';
@@ -42,20 +41,6 @@ const containerStyle = {
     height: '100vh',
     flexGrow: 1,
 };
-
-// set Google Maps Geocoding API for purposes of quota management. Its optional but recommended.
-// Geocode.setApiKey(GOOGLE_API_KEY);
-
-// // Get latitude & longitude from address.
-// Geocode.fromAddress("Eiffel Tower").then(
-//     (response) => {
-//       const { lat, lng } = response.results[0].geometry.location;
-//       console.log(lat, lng);
-//     },
-//     (error) => {
-//       console.error(error);
-//     }
-//   );
 
 function Map({posts}) {
     const [searchBox, setSearchBox] = useState(null);
