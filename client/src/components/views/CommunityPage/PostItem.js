@@ -55,7 +55,7 @@ function PostItem({item}) {
                 <TextBox>
                     <h2>{title}</h2>
                     <p>{location}</p>
-                    <p>{content}</p>
+                    <p>{`${content.slice(0,15)}...`}</p>
                 </TextBox>
             </ItemBox>
         </Link> 

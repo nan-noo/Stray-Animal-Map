@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import axios from '../../../axios';
 
 import {POST_SERVER} from '../../Config';
-import { useMapNextId } from '../../../context/MapContext';
 
 import { PrimaryButton } from '../../assets/Buttons';
 import RadioButton from '../../assets/RadioButton';
@@ -59,21 +58,17 @@ const ContentArea = styled.textarea`
 function UploadPage() {
     const history = useHistory();
     const user = useSelector(state => state.user);
-    const nextId = useMapNextId();
     const [inputs, setInputs] = useState({
         title: '', img: '', content: '', location: '',
     });
     const {title, img, content, location} = inputs;
-
     const [type, setType] = useState(''); // 'find' or 'lost'
 
     const onSubmit = async e => {
         e.preventDefault();
 
-        const data = { ...inputs, type, writer: user.userData._id, postId: nextId.current, latLng: {lat: 37.5172363, lng: 127.0473248}}
-        nextId.current++;
+        const data = { ...inputs, type, writer: user.userData._id, latLng: {lat: 37.5172363, lng: 127.0473248}}
         const response = await axios.post(`${POST_SERVER}/uploadPost`, data);
-
         response.data.success && history.push('/');
     };
 

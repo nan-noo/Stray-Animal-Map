@@ -4,7 +4,6 @@ import styled, {css} from 'styled-components';
 import {AiOutlinePlus} from 'react-icons/ai';
 
 import Items from './Items';
-import { useMapState } from '../../../../context/MapContext';
 import {SecondaryButton} from '../../../assets/Buttons';
 
 const OnOffButton = styled.button`
@@ -82,9 +81,8 @@ const GridBox = styled.div`
     }
 `;
 
-function GridMenu() {
+function GridMenu({posts}) {
     const [close, setClose] = useState(false);
-    const { items } = useMapState();
 
     return (
         <>
@@ -93,7 +91,7 @@ function GridMenu() {
             </OnOffButton>
             <GridBox close={close}>
                 <GridBar>
-                    <div>found {items.length} results</div>
+                    <div>found {posts.length} results</div>
                     <Link to="/upload" style={{color: 'black'}}>
                         <SecondaryButton><AiOutlinePlus/>Add</SecondaryButton>
                     </Link>

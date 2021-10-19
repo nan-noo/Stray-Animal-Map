@@ -5,7 +5,6 @@ import axios from '../../../axios';
 import { FaDog } from 'react-icons/fa';
 
 import { POST_SERVER } from '../../Config';
-import {useMapState} from '../../../context/MapContext';
 import Comments from './Sections/Comments';
 
 const PostBox = styled.div`
@@ -58,12 +57,10 @@ function PostDetail() {
     const [post, setPost] = useState(null);
     const [CommentList, setCommentList] = useState([]);
     const params = useParams();
-    const {items} = useMapState();
 
     useEffect(() => {
         axios.post(`${POST_SERVER}/getPost`, {postId: params.postId})
             .then(response => {
-                console.log(response.data);
                 response.data.success ? setPost(response.data.post) : alert('Failed to get post');
             })
 
@@ -94,7 +91,7 @@ function PostDetail() {
                                 <p>{post.location}</p>
                             </TextBox>
                         </BoxHeader>
-                        <BoxBody>post.desc</BoxBody>
+                        <BoxBody>{post.content}</BoxBody>
                     </PostBox>
 
                     {/* COMMENTS */}

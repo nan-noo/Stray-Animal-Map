@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import axios from '../../../../axios';
 
 import { POST_SERVER } from '../../../Config';
-import { useMapState } from '../../../../context/MapContext';
 import Item from './Item';
 
 const Container = styled.div`
@@ -22,7 +21,6 @@ function Items() {
                 response.data.success ? setPosts(response.data.posts) : alert('Faile to get posts');
             });
     }, []);
-    const {items, } = useMapState();
 
     return (
         <Container>

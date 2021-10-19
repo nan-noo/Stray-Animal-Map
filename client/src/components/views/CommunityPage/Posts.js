@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import axios from '../../../axios';
 
-import { useMapState } from '../../../context/MapContext';
 import PostItem from './PostItem';
 import { POST_SERVER } from '../../Config';
 

@@ -1,11 +1,8 @@
-import React, {useState, useEffect} from 'react';
-import axios from '../../../../axios';
+import React, {useState} from 'react';
 import { GoogleMap, LoadScript, InfoWindow, Marker, StandaloneSearchBox } from '@react-google-maps/api';
 import styled from 'styled-components';
 import {IoSearchOutline} from 'react-icons/io5';
 //import Geocode from "react-geocode";
-
-import { POST_SERVER } from '../../../Config';
 
 import mapStyle from './style/mapStyle';
 import libraries from './libraries/libraries';
@@ -60,25 +57,17 @@ const containerStyle = {
 //     }
 //   );
 
-function Map() {
-    const [posts, setPosts] = useState([]);
+function Map({posts}) {
     const [searchBox, setSearchBox] = useState(null);
     const dispatch = useMapDispatch();
-    const {center, items} = useMapState();
+    const {center} = useMapState();
 
     const [place, setPlace] = useState(null);
     const [checked1, setChecked1] = useState(true);
     const [checked2, setChecked2] = useState(true);
 
-    useEffect(() => {
-        axios.get(`${POST_SERVER}/getPosts`)
-            .then(response => {
-                response.data.success ? setPosts(response.data.posts) : alert('Faile to get posts');
-            });
-    }, []);
-
-
-    const onInfoWindowLoad = infoWindow => { console.log('infoWindow: ', infoWindow); };
+    const onInfoWindowLoad = infoWindow => { //console.log('infoWindow: ', infoWindow); 
+    };
     const onSearchBoxLoad = ref => { setSearchBox(ref); };
     const onPlacesChanged = () => {
         const inputPlace = searchBox.getPlaces()[0].geometry.location;
