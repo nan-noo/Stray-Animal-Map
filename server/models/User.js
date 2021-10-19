@@ -52,27 +52,13 @@ userSchema.pre('save', function(next){
     else next();
 })
 
-/* 
-Static methods apply to the entire model on which they are defined 
-whereas instance methods apply only to a specific document within the collection. 
-this in the context of a static method returns the entire model 
-whereas this in the context of an instance method returns the document.
-
-instance method는 document에 적용되는 method이며
-static method는 model에 적용 되는 method이다.
-
-일반적으로 instance method는 query로 찾은 document에 적용하는 method를 정의하기 위해 쓰고,
-static method는 model을 통해 query를 하기위해 쓰인다. 
-*/
-
-// method를 할당하는 경우 화살표함수 쓰면 this가 undefined임: 화살표함수의 this는 언제나 상위 scope의 this를 가리킴
 userSchema.methods.comparePassword = function(plainPassword, callback){
     bcrypt.compare(plainPassword, this.password, (err, isMatch) => { // compare user input & DB data
         if(err) return callback(err);
         callback(null, isMatch);
     })
 };
-// 화살표함수 쓰면 this가 undefined임
+
 userSchema.methods.generateToken = function(callback) { // (err, user)
     let user = this;
 

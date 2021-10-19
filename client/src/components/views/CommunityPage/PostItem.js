@@ -41,21 +41,21 @@ const TextBox = styled.div`
 `;
 
 function PostItem({item}) {
-    const {id, src, title, location, type} = item;
-    const color = type === 0 ? '#ec407a' : '#42a5f5';
+    const {_id, img, title, location, type, content} = item;
+    const color = type === 'find' ? '#ec407a' : '#42a5f5';
     
     return (
-        <Link to={`/community/${id}`}>
+        <Link to={`/community/${_id}`}>
             <ItemBox>
-                {src 
-                    ? <Image src={src}/>
+                {img 
+                    ? <Image src={img}/>
                     : <FaDog style={{height: '30%', width: '30%', margin: '0.9em auto', color}}/>
                 }
                 
                 <TextBox>
                     <h2>{title}</h2>
                     <p>{location}</p>
-                    <p>desc</p>
+                    <p>{content}</p>
                 </TextBox>
             </ItemBox>
         </Link> 

@@ -37,14 +37,14 @@ const TextBox = styled.div`
 `;
 
 function Item({item}) {
-    const {id, src, title, location, type} = item;
-    const color = type === 0 ? '#ec407a' : '#42a5f5';
+    const {_id, img, title, location, type} = item;
+    const color = type === 'find' ? '#ec407a' : '#42a5f5';
 
     return (
-        <Link to={`/community/${id}`}>
+        <Link to={`/community/${_id}`}>
             <ItemBox>
-                {src 
-                    ? <Image src={src}/>
+                {img 
+                    ? <Image src={img}/>
                     : <FaDog style={{width: '20%', height: '100%', margin: '0.9em', color}}/>
                 }
                 

@@ -1,6 +1,11 @@
 import React, {useState} from 'react';
+import {useSelector} from 'react-redux';
+import {useHistory} from 'react-router-dom';
 import styled from 'styled-components';
 import axios from '../../../axios';
+
+import {POST_SERVER} from '../../Config';
+import { useMapNextId } from '../../../context/MapContext';
 
 import { PrimaryButton } from '../../assets/Buttons';
 import RadioButton from '../../assets/RadioButton';
@@ -52,17 +57,24 @@ const ContentArea = styled.textarea`
 `;
 
 function UploadPage() {
+    const history = useHistory();
+    const user = useSelector(state => state.user);
+    const nextId = useMapNextId();
     const [inputs, setInputs] = useState({
-        title: '', img: '', content: '', location: ''
+        title: '', img: '', content: '', location: '',
     });
     const {title, img, content, location} = inputs;
 
-    const [checked, setChecked] = useState(''); // 'find' or 'lost'
+    const [type, setType] = useState(''); // 'find' or 'lost'
 
-    // postId, latLng, writer도 같이 업로드
-    const onSubmit = e => {
+    const onSubmit = async e => {
         e.preventDefault();
-        console.log(inputs);
+
+        const data = { ...inputs, type, writer: user.userData._id, postId: nextId.current, latLng: {lat: 37.5172363, lng: 127.0473248}}
+        nextId.current++;
+        const response = await axios.post(`${POST_SERVER}/uploadPost`, data);
+
+        response.data.success && history.push('/');
     };
 
     const onInputChange = e => {
@@ -71,7 +83,7 @@ function UploadPage() {
     };
 
     const onCheckedHandler = e => {
-        setChecked(e.target.value);
+        setType(e.target.value);
     }
 
     return (
@@ -86,8 +98,8 @@ function UploadPage() {
                     <InputBox type="text" placeholder="위치를 작성해주세요" 
                         name="location" value={location} onChange={onInputChange}
                     />
-                    <RadioButton checked={checked} setChecked={onCheckedHandler}/>
-                    <ContentArea/>
+                    <RadioButton checked={type} setChecked={onCheckedHandler}/>
+                    <ContentArea name="content" value={content} onChange={onInputChange} placeholder="내용을 작성해주세요"/>
                     <PrimaryButton>upload</PrimaryButton>
                 </FormBox>
             </UploadBox>  

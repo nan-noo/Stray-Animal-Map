@@ -11,8 +11,7 @@ const userReducer = function(previousState = {}, action){
         case LOGOUT_USER:
             return {...previousState, logout: action.payload};
         default:
-            return previousState;
-            
+            return previousState;   
     }
 }
 

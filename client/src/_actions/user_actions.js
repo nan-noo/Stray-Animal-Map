@@ -3,11 +3,9 @@ import {USER_SERVER} from '../components/Config';
 import {LOGIN_USER, REGISTER_USER, AUTH_USER, LOGOUT_USER} from './types';
 
 export function loginUser(dataToSubmit){
-    // 서버로부터 받은 데이터를 request에 저장
     const request = axios.post(`${USER_SERVER}/login`, dataToSubmit) 
         .then(response => response.data);
 
-    // reducer에 넘겨준다.
     return {
         type: LOGIN_USER,
         payload: request

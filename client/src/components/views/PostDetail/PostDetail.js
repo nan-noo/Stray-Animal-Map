@@ -1,8 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import {useParams} from 'react-router-dom';
 import styled from 'styled-components';
+import axios from '../../../axios';
 import { FaDog } from 'react-icons/fa';
 
+import { POST_SERVER } from '../../Config';
 import {useMapState} from '../../../context/MapContext';
 import Comments from './Sections/Comments';
 
@@ -59,10 +61,13 @@ function PostDetail() {
     const {items} = useMapState();
 
     useEffect(() => {
-        setPost(items.find(item => item.id === Number(params.postId)));
+        axios.post(`${POST_SERVER}/getPost`, {postId: params.postId})
+            .then(response => {
+                console.log(response.data);
+                response.data.success ? setPost(response.data.post) : alert('Failed to get post');
+            })
 
-        // get comments from server
-    }, [items, params]);
+    }, [params]);
 
     const updateComment = newComment => {
         setCommentList(CommentList.concat(newComment));

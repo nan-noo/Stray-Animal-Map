@@ -6,7 +6,7 @@ const postSchema = mongoose.Schema({
         ref: 'User'
     },
     postId: {
-        type: String,
+        type: Number,
         unique: 1,
     },
     title: {
@@ -17,7 +17,7 @@ const postSchema = mongoose.Schema({
         type: String,
     },
     img: String,
-    type: Number,
+    type: String,
     location: String,
     latLng: {
         type: Object,

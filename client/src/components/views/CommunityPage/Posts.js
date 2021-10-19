@@ -1,8 +1,10 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
+import axios from '../../../axios';
 
 import { useMapState } from '../../../context/MapContext';
 import PostItem from './PostItem';
+import { POST_SERVER } from '../../Config';
 
 const PostsBox = styled.div`
     display: flex;
@@ -13,12 +15,19 @@ const PostsBox = styled.div`
 `;
 
 function Posts() {
-    const {items} = useMapState();
+    const [posts, setPosts] = useState([]);
+
+    useEffect(() => {
+        axios.get(`${POST_SERVER}/getPosts`)
+            .then(response => {
+                response.data.success ? setPosts(response.data.posts) : alert('Faile to get posts');
+            });
+    }, []);
 
     return (
         <PostsBox>
-            {items.map(item => (
-                <PostItem key={item.id} item={item}/>
+            {posts.map((post, index) => (
+                <PostItem key={index} item={post}/>
             ))}
         </PostsBox>
     )
