@@ -6,6 +6,8 @@ import Map from './Map/Map';
 import GridMenu from './GridMenu/GridMenu';
 
 function LandingPage() {
+    const [checked1, setChecked1] = useState(true);
+    const [checked2, setChecked2] = useState(true);
     const [posts, setPosts] = useState([]);
     useEffect(() => {
         axios.get(`${POST_SERVER}/getPosts`)
@@ -22,8 +24,8 @@ function LandingPage() {
             display: 'flex',
             flexDirection: 'row'
         }}>
-            <Map posts={posts}/>
-            <GridMenu posts={posts}/>
+            <Map posts={posts} checked1={checked1} checked2={checked2} setChecked1={setChecked1} setChecked2={setChecked2}/>
+            <GridMenu posts={posts} checked1={checked1} checked2={checked2}/>
         </div>
 
     );

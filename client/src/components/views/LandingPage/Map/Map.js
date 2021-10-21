@@ -42,14 +42,12 @@ const containerStyle = {
     flexGrow: 1,
 };
 
-function Map({posts}) {
+function Map({posts, checked1, checked2, setChecked1, setChecked2}) {
     const [searchBox, setSearchBox] = useState(null);
     const dispatch = useMapDispatch();
     const {center} = useMapState();
 
     const [place, setPlace] = useState(null);
-    const [checked1, setChecked1] = useState(true);
-    const [checked2, setChecked2] = useState(true);
 
     const onInfoWindowLoad = infoWindow => { //console.log('infoWindow: ', infoWindow); 
     };

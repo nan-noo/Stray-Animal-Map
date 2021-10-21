@@ -22,7 +22,6 @@ router.get('/getPosts', (req, res) => {
 router.post('/getPost', (req, res) => {
     Post.findOne({_id: req.body.postId})
         .exec((err, post) => {
-            console.log(post);
             if(err) return res.json({success: false, err})
             return res.status(200).json({success: true, post})
         });

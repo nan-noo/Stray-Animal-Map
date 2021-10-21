@@ -81,7 +81,7 @@ const GridBox = styled.div`
     }
 `;
 
-function GridMenu({posts}) {
+function GridMenu({posts, checked1, checked2}) {
     const [close, setClose] = useState(false);
 
     return (
@@ -96,7 +96,7 @@ function GridMenu({posts}) {
                         <SecondaryButton><AiOutlinePlus/>Add</SecondaryButton>
                     </Link>
                 </GridBar>
-                <Items/>
+                <Items checked1={checked1} checked2={checked2}/>
             </GridBox>
         </>
     )

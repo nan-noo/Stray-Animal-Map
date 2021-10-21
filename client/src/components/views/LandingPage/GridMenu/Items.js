@@ -7,12 +7,12 @@ import Item from './Item';
 
 const Container = styled.div`
     height: calc(100% - 4rem);
-    overflow-y: scroll;
+    overflow-y: auto;
 
     background: #fafafa;
 `;
 
-function Items() {
+function Items({checked1, checked2}) {
     const [posts, setPosts] = useState([]);
 
     useEffect(() => {
@@ -24,8 +24,13 @@ function Items() {
 
     return (
         <Container>
-            {posts.map((post, index) => (
-                <Item key={index} item={post}/>
+            {checked1 && posts.map((post, index) => (
+                post.type === 'find'
+                && <Item key={index} item={post}/>
+            ))}
+            {checked2 && posts.map((post, index) => (
+                post.type === 'lost'
+                && <Item key={index} item={post}/>
             ))}
         </Container>
     )
