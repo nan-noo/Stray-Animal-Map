@@ -6,11 +6,13 @@ import PostItem from './PostItem';
 import { POST_SERVER } from '../../Config';
 
 const PostsBox = styled.div`
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
 
     height: 100%;
     margin: 3em 0;
 
+    overflow-y: auto;
 `;
 
 function Posts() {
