@@ -24,14 +24,10 @@ function Items({checked1, checked2}) {
 
     return (
         <Container>
-            {checked1 && posts.map((post, index) => (
-                post.type === 'find'
-                && <Item key={index} item={post}/>
-            ))}
-            {checked2 && posts.map((post, index) => (
-                post.type === 'lost'
-                && <Item key={index} item={post}/>
-            ))}
+            {posts.map((post, index) => {
+                if(checked1 && post.type === 'find') return <Item key={index} item={post}/>;
+                if(checked2 && post.type === 'lost') return <Item key={index} item={post}/>;
+            })}
         </Container>
     )
 }

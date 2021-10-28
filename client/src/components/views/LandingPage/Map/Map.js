@@ -106,22 +106,22 @@ function Map({posts, checked1, checked2, setChecked1, setChecked2}) {
                             }
                         </div>
                     </InfoWindow> 
-                    {checked1 && posts.map((item, index) => (
-                        item.type === 'find'
-                        && <Marker 
+                    {posts.map((post, index) => {
+                        if(checked1 && post.type === 'find') {
+                            return <Marker 
                                 key={index}
                                 icon={{ url: findIcon }}
-                                position={item.latLng}
-                            />
-                    ))}
-                    {checked2 && posts.map((item, index) => (
-                        item.type === 'lost'
-                        && <Marker 
+                                position={post.latLng}
+                            />;
+                        }
+                        else if(checked2 && post.type === 'lost') {
+                            return <Marker 
                                 key={index}
                                 icon={{ url: lostIcon }}
-                                position={item.latLng}
-                            />
-                    ))}
+                                position={post.latLng}
+                            />;
+                        } 
+                    })}
                 </GoogleMap>
             </LoadScript>
         </>   
