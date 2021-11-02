@@ -7,6 +7,7 @@ const config = require('./config/key');
 
 const userRouter = require('./routes/users');
 const postRouter = require('./routes/posts');
+const commentRouter = require('./routes/comments');
 
 const app = express();
 app.use(cors());
@@ -20,11 +21,12 @@ mongoose.connect( config.mongoURI, {
     useCreateIndex: true,
     useFindAndModify: false
 }).then(() => console.log('MongoDB connected...'))
-.catch( err => console.log(err));
+    .catch( err => console.log(err));
 
 //router
 app.use('/api/users', userRouter);
 app.use('/api/posts', postRouter);
+app.use('/api/comments', commentRouter);
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Listening on port ${port}...`))
