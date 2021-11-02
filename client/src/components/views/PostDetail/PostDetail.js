@@ -74,7 +74,7 @@ function PostDetail() {
     }, [params]);
 
     const updateComment = newComment => {
-        setCommentList([...commentList, newComment]);
+        setCommentList(commentList.concat(newComment));
     };
 
     return (

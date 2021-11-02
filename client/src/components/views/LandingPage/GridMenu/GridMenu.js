@@ -99,7 +99,7 @@ function GridMenu({posts, checked1, checked2, mapBounds}) {
                 <Items checked1={checked1} checked2={checked2} posts={posts} mapBounds={mapBounds}/>
             </GridBox>
         </>
-    )
+    );
 }
 
 export default GridMenu;

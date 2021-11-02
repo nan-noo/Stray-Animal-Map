@@ -7,7 +7,7 @@ function ReplyComment({commentList, parentCommentId, postId, refreshFunction}) {
 
     useEffect(() => {
         let commentNum = 0;
-        commentList.map((comment) => {
+        commentList.forEach((comment) => {
             if(comment.responseTo === parentCommentId){
                 commentNum++;
             }

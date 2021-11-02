@@ -1,4 +1,4 @@
-import React, {useState, useCallback} from 'react';
+import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
 import { 
     GoogleMap, InfoWindow, Marker, StandaloneSearchBox,
@@ -122,7 +122,8 @@ function Map({posts, checked1, checked2, setChecked1, setChecked2, setMapBounds}
                                 icon={{ url: lostIcon }}
                                 position={post.latLng}
                             />;
-                        }         
+                        }
+                        else return <></>;       
                     })}
                 </GoogleMap>
     ) : <p>Loading...</p>
