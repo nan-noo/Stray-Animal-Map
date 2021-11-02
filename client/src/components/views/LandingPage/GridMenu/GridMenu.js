@@ -81,9 +81,9 @@ const GridBox = styled.div`
     }
 `;
 
-function GridMenu({posts, checked1, checked2}) {
+function GridMenu({posts, checked1, checked2, mapBounds}) {
     const [close, setClose] = useState(false);
-
+    
     return (
         <>
             <OnOffButton close={close} onClick={() => setClose(!close)}>
@@ -91,12 +91,12 @@ function GridMenu({posts, checked1, checked2}) {
             </OnOffButton>
             <GridBox close={close}>
                 <GridBar>
-                    <div>found {posts.length} results</div>
+                    <div>found {posts.filter(post => mapBounds.contains(post.latLng)).length} results</div>
                     <Link to="/upload" style={{color: 'black'}}>
                         <SecondaryButton><AiOutlinePlus/>Add</SecondaryButton>
                     </Link>
                 </GridBar>
-                <Items checked1={checked1} checked2={checked2}/>
+                <Items checked1={checked1} checked2={checked2} posts={posts} mapBounds={mapBounds}/>
             </GridBox>
         </>
     )

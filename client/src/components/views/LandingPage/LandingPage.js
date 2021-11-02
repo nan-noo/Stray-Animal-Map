@@ -8,7 +8,9 @@ import GridMenu from './GridMenu/GridMenu';
 function LandingPage() {
     const [checked1, setChecked1] = useState(true);
     const [checked2, setChecked2] = useState(true);
+    const [mapBounds, setMapBounds] = useState(null);
     const [posts, setPosts] = useState([]);
+
     useEffect(() => {
         axios.get(`${POST_SERVER}/getPosts`)
             .then(response => {
@@ -24,8 +26,10 @@ function LandingPage() {
             display: 'flex',
             flexDirection: 'row'
         }}>
-            <Map posts={posts} checked1={checked1} checked2={checked2} setChecked1={setChecked1} setChecked2={setChecked2}/>
-            <GridMenu posts={posts} checked1={checked1} checked2={checked2}/>
+            <Map posts={posts} checked1={checked1} checked2={checked2} setChecked1={setChecked1} setChecked2={setChecked2}
+                setMapBounds={setMapBounds}
+            />
+            <GridMenu posts={posts} checked1={checked1} checked2={checked2} mapBounds={mapBounds}/>
         </div>
 
     );

@@ -12,19 +12,11 @@ const Container = styled.div`
     background: #fafafa;
 `;
 
-function Items({checked1, checked2}) {
-    const [posts, setPosts] = useState([]);
-
-    useEffect(() => {
-        axios.get(`${POST_SERVER}/getPosts`)
-            .then(response => {
-                response.data.success ? setPosts(response.data.posts) : alert('Faile to get posts');
-            });
-    }, []);
-
+function Items({checked1, checked2, posts, mapBounds}) {
     return (
         <Container>
-            {posts.map((post, index) => {
+            {posts.filter(post => mapBounds.contains(post.latLng))
+                .map((post, index) => {
                 if(checked1 && post.type === 'find') return <Item key={index} item={post}/>;
                 if(checked2 && post.type === 'lost') return <Item key={index} item={post}/>;
             })}

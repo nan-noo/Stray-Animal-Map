@@ -1,6 +1,9 @@
-import React, {useState} from 'react';
+import React, {useState, useCallback} from 'react';
 import {Link} from 'react-router-dom';
-import { GoogleMap, LoadScript, InfoWindow, Marker, StandaloneSearchBox } from '@react-google-maps/api';
+import { 
+    GoogleMap, InfoWindow, Marker, StandaloneSearchBox,
+    useJsApiLoader 
+} from '@react-google-maps/api';
 import styled from 'styled-components';
 import {IoSearchOutline} from 'react-icons/io5';
 
@@ -43,14 +46,19 @@ const containerStyle = {
     flexGrow: 1,
 };
 
-function Map({posts, checked1, checked2, setChecked1, setChecked2}) {
+function Map({posts, checked1, checked2, setChecked1, setChecked2, setMapBounds}) {
+    const { isLoaded } = useJsApiLoader({
+        id: 'google-map-script',
+        googleMapsApiKey: GOOGLE_API_KEY,
+        libraries: libraries
+    });
+    const [googleMap, setGoogleMap] = useState(null);
     const [searchBox, setSearchBox] = useState(null);
     const [address, setAddress] = useState('');
     const dispatch = useMapDispatch();
     const {center} = useMapState();
 
-    const onInfoWindowLoad = infoWindow => { //console.log('infoWindow: ', infoWindow); 
-    };
+    const onGoogleMapLoad = map => { setGoogleMap(map); setMapBounds(map.getBounds()); };
     const onSearchBoxLoad = ref => { setSearchBox(ref); };
     const onPlacesChanged = () => {
         setAddress(searchBox.getPlaces()[0].formatted_address);
@@ -58,13 +66,7 @@ function Map({posts, checked1, checked2, setChecked1, setChecked2}) {
         dispatch({type: 'UPDATE_CENTER', lat: inputPlace.lat(), lng: inputPlace.lng()})
     };
 
-    return (
-        <>
-            <LoadScript
-                googleMapsApiKey={GOOGLE_API_KEY}
-                libraries={libraries}
-            >   
-                {/* Map */}
+    return isLoaded ? (
                 <GoogleMap
                     mapContainerStyle={containerStyle}
                     center={center}
@@ -72,6 +74,8 @@ function Map({posts, checked1, checked2, setChecked1, setChecked2}) {
                     options={{
                         styles: mapStyle
                     }}
+                    onLoad={onGoogleMapLoad}
+                    onBoundsChanged={() => {setMapBounds(googleMap.getBounds());}}
                 >
                     {/* Search Bar */}
                     <StandaloneSearchBox
@@ -94,7 +98,6 @@ function Map({posts, checked1, checked2, setChecked1, setChecked2}) {
                     {/* info items */}
                     {address && 
                         <InfoWindow
-                            onLoad={onInfoWindowLoad}
                             position={center}
                         >   
                             <Link to={{
@@ -119,12 +122,10 @@ function Map({posts, checked1, checked2, setChecked1, setChecked2}) {
                                 icon={{ url: lostIcon }}
                                 position={post.latLng}
                             />;
-                        } 
+                        }         
                     })}
                 </GoogleMap>
-            </LoadScript>
-        </>   
-    );
+    ) : <p>Loading...</p>
 }
 
 export default Map;
