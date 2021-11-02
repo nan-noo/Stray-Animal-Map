@@ -8,11 +8,14 @@ import { POST_SERVER } from '../../Config';
 const PostsBox = styled.div`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    place-content: center;
 
-    height: 100%;
     margin: 3em 0;
 
-    overflow-y: auto;
+    @media only screen and (max-width: 48rem) {
+        display: flex;
+        flex-direction: column;
+    }
 `;
 
 function Posts() {

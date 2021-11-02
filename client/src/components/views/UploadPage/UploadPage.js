@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {useSelector} from 'react-redux';
-import {useHistory} from 'react-router-dom';
+import {useHistory, useLocation} from 'react-router-dom';
 import Geocode from "react-geocode";
 import styled from 'styled-components';
 import axios from '../../../axios';
@@ -73,9 +73,10 @@ async function getGeocode(location){
 
 function UploadPage() {
     const history = useHistory();
+    const _location = useLocation();
     const user = useSelector(state => state.user);
     const [inputs, setInputs] = useState({
-        title: '', img: '', content: '', location: '',
+        title: '', img: '', content: '', location: _location.state?.address || '',
     });
     const {title, img, content, location} = inputs;
     const [type, setType] = useState('find');

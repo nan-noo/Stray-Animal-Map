@@ -11,6 +11,9 @@ import { PrimaryButton } from '../../../assets/Buttons';
 const CommentsBox = styled.div`
     width: 80%;
     background: white;
+    border: 1px solid rgba(0,0,0,.1);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,.05);
 `;
 
 const CommentForm = styled.form`

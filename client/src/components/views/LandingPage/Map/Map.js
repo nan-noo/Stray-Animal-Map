@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {Link} from 'react-router-dom';
 import { GoogleMap, LoadScript, InfoWindow, Marker, StandaloneSearchBox } from '@react-google-maps/api';
 import styled from 'styled-components';
 import {IoSearchOutline} from 'react-icons/io5';
@@ -44,18 +45,16 @@ const containerStyle = {
 
 function Map({posts, checked1, checked2, setChecked1, setChecked2}) {
     const [searchBox, setSearchBox] = useState(null);
+    const [address, setAddress] = useState('');
     const dispatch = useMapDispatch();
     const {center} = useMapState();
-
-    const [place, setPlace] = useState(null);
 
     const onInfoWindowLoad = infoWindow => { //console.log('infoWindow: ', infoWindow); 
     };
     const onSearchBoxLoad = ref => { setSearchBox(ref); };
     const onPlacesChanged = () => {
+        setAddress(searchBox.getPlaces()[0].formatted_address);
         const inputPlace = searchBox.getPlaces()[0].geometry.location;
-        
-        setPlace(inputPlace);
         dispatch({type: 'UPDATE_CENTER', lat: inputPlace.lat(), lng: inputPlace.lng()})
     };
 
@@ -93,19 +92,19 @@ function Map({posts, checked1, checked2, setChecked1, setChecked2}) {
                     </StandaloneSearchBox>
 
                     {/* info items */}
-                    <InfoWindow
-                        onLoad={onInfoWindowLoad}
-                        position={center}
-                    >
-                        <div style={{background: 'white'}}>
-                            {place &&
-                                <>
-                                    <p>{place.lat()}</p> 
-                                    <p>{place.lng()}</p>
-                                </>
-                            }
-                        </div>
-                    </InfoWindow> 
+                    {address && 
+                        <InfoWindow
+                            onLoad={onInfoWindowLoad}
+                            position={center}
+                        >   
+                            <Link to={{
+                                pathname: '/upload',
+                                state: {address}
+                            }} style={{color: '#ec407a', fontSize: '.9rem', fontWeight: 'bold'}}>
+                                여기에 추가하기
+                            </Link>
+                        </InfoWindow>
+                    }
                     {posts.map((post, index) => {
                         if(checked1 && post.type === 'find') {
                             return <Marker 
