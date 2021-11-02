@@ -1,44 +1,85 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
+import {useSelector} from 'react-redux';
+import axios from '../../../../axios';
 import styled from 'styled-components';
+
+import { COMMENT_SERVER } from '../../../Config';
+import SingleComment from './SingleComment';
+import ReplyComment from './ReplyComment';
+import { PrimaryButton } from '../../../assets/Buttons';
 
 const CommentsBox = styled.div`
     width: 80%;
     background: white;
 `;
 
-function Comments() {
+const CommentForm = styled.form`
+    display: flex;
+    padding: .9em;
+`;
+
+const TextArea = styled.textarea`
+    flex-grow: 1;
+    border-radius: 5px;
+    border: 1px solid #e0e0e0;
+    
+    padding: 0.9em;
+`;
+
+const ReplyBox = styled.div`
+    padding: 0 0.9em 0.9em;
+`;
+
+function Comments({commentList, postId, refreshFunction}) {
+    const user = useSelector(state => state.user);
+    const [commentValue, setCommentValue] = useState('');
+
+    const onSubmit = e => {
+        e.preventDefault();
+        
+        if(!user.userData.isAuth){
+            alert('You need to login');
+            return;
+        }
+        if(!commentValue){
+            alert('no content');
+            return;
+        }
+
+        const data = {
+            content: commentValue,
+            writer: user.userData._id,
+            postId: postId,
+        };
+        axios.post(`${COMMENT_SERVER}/comment`, data)
+            .then(response => {
+                if(response.data.success){
+                    refreshFunction(response.data.result);
+                    setCommentValue('');
+                }
+                else alert('Failed to save comment');
+            })
+    };
+
     return (
         <CommentsBox>
-            comments
+            <p style={{padding: '0.9em 0.9em 0'}}>{commentList.length} Replies</p>
+            <CommentForm onSubmit={onSubmit}>
+                <TextArea placeholder="댓글을 작성해주세요." value={commentValue} onChange={e => setCommentValue(e.target.value)}/>
+                <PrimaryButton type="submit" width="5em">Submit</PrimaryButton>
+            </CommentForm>
+
+            {/* Comment list */}
+            {commentList && commentList.map((comment, index) => (
+                (!comment.responseTo &&
+                    <ReplyBox key={index}>
+                        <SingleComment  postId={postId} comment={comment} refreshFunction={refreshFunction}/>
+                        <ReplyComment parentCommentId={comment._id} commentList={commentList} postId={postId} refreshFunction={refreshFunction}/>
+                    </ReplyBox>
+                )  
+            ))}
         </CommentsBox>
-    )
+    );
 }
 
-export default Comments
-
-// <div>
-//             <br/>
-//             <p>{commentList.length} Replies</p>
-//             <hr/>
-//             {/* Root Comment Form */}
-//             <form style={{display: 'flex'}} onSubmit={onSubmit}>
-//                 <TextArea
-//                     style={{width: '100%', borderRadius: '5px'}}
-//                     onChange={(event) => setCommentValue(event.currentTarget.value)}
-//                     value={CommentValue}
-//                     placeholder= 'write a comment'
-//                 />
-//                 <br/>
-//                 <Button style={{width: '15%', height: '52px', marginLeft: '10px'}} onClick={onSubmit}>Submit</Button>
-//             </form>
-
-//             {/* Comments List */}
-//             {commentList && commentList.map((comment, index) => (
-//                 (!comment.responseTo &&
-//                     <React.Fragment key={index}>
-//                         <SingleComment  movieId={movieId} comment={comment} refreshFunction={props.refreshFunction}/>
-//                         <ReplyComment parentCommentId={comment._id} commentList={commentList} movieId={movieId} refreshFunction={props.refreshFunction}/>
-//                     </React.Fragment>
-//                 )  
-//             ))}
-//         </div>
+export default Comments;

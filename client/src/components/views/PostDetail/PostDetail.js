@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import axios from '../../../axios';
 import { FaDog } from 'react-icons/fa';
 
-import { POST_SERVER } from '../../Config';
+import { COMMENT_SERVER, POST_SERVER } from '../../Config';
 import Comments from './Sections/Comments';
 
 const PostBox = styled.div`
@@ -13,7 +13,7 @@ const PostBox = styled.div`
 
     width: 80%;
     height: 60%;
-    margint: 3em 0;
+    margin-bottom: 0.9em;
     padding: 1em 2em;
 
     background: white;
@@ -57,7 +57,7 @@ const BoxBody = styled.p`
 
 function PostDetail() {
     const [post, setPost] = useState(null);
-    const [CommentList, setCommentList] = useState([]);
+    const [commentList, setCommentList] = useState([]);
     const params = useParams();
 
     useEffect(() => {
@@ -66,17 +66,23 @@ function PostDetail() {
                 response.data.success ? setPost(response.data.post) : alert('Failed to get post');
             })
 
+        axios.get(`${COMMENT_SERVER}/allComments?postId=${params.postId}`)
+            .then(response => {
+                response.data.success ? setCommentList(response.data.result) : alert('Failed to get comments');
+            });
+
     }, [params]);
 
     const updateComment = newComment => {
-        setCommentList(CommentList.concat(newComment));
+        setCommentList([...commentList, newComment]);
     };
 
     return (
         <div className="app"
             style={{
                 background: '#f5f5f5',
-                justifyContent: 'space-around'
+                justifyContent: 'space-around',
+                padding: '0.9em',
             }}
         >
             {post && 
@@ -97,7 +103,7 @@ function PostDetail() {
                     </PostBox>
 
                     {/* COMMENTS */}
-                    <Comments postId={post.id} commentList={CommentList} refreshFunction={updateComment}/>
+                    <Comments postId={params.postId} commentList={commentList} refreshFunction={updateComment}/>
                 </>
             }
         </div>
