@@ -111,7 +111,7 @@ function LoginPage(props) {
                                 <Checkbox id="rememberMe" onChange={() => setRememberMe(!RememberMe)} checked={RememberMe} 
                                 style={{margin: '2px', color: 'rgba(0,0,0,.50)'}} 
                                 >remember Me</Checkbox>
-                                <PrimaryButton type="submit" onClick={handleSubmit} disabled={isSubmitting}>Login</PrimaryButton>
+                                <PrimaryButton type="submit" onClick={handleSubmit} disabled={isSubmitting} width="100%">Login</PrimaryButton>
                                 <div style={{color: 'rgba(0,0,0,.50)', fontStyle: 'italic', marginTop: '5px'}}>
                                     New here? 
                                     <Link to="/register">

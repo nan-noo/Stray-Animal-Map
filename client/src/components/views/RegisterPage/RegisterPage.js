@@ -204,7 +204,7 @@ function RegisterPage(props) {
                             </Form.Item>
 
                             <Form.Item {...tailFormItemLayout}>
-                                <PrimaryButton type="submit" onClick={handleSubmit} disabled={isSubmitting}>Register</PrimaryButton>
+                                <PrimaryButton type="submit" onClick={handleSubmit} disabled={isSubmitting} width="100%">Register</PrimaryButton>
                                 <div style={{color: 'rgba(0,0,0,.50)', fontStyle: 'italic', marginTop: '5px'}}>
                                     Already have an account? 
                                     <Link to="/login">

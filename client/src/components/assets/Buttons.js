@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const PrimaryButton = styled.button`
-    width: 100%;
+    width: ${props => props.width};
 
     background: #ec407a;
     color: white;
