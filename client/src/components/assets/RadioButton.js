@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import {AiOutlineCheck} from 'react-icons/ai';
 
 const RadioBox = styled.div`
     display: flex;
@@ -16,10 +17,15 @@ const CheckLabel = styled.label`
 `;
 
 const CheckMark = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     height: 1.5em;
     width: 1.5em;
     background: ${props => props.checked ? props.color: '#eeeeee'};
     border-radius: 50%;
+    color: white;
 
     &:hover{
         opacity: 0.8;
@@ -41,13 +47,13 @@ function RadioButton({checked, setChecked}) {
                 find &nbsp;
                 <CheckInput type="radio" name="animal" value="find" 
                     checked={checked === 'find'} onChange={setChecked}/>
-                <CheckMark checked={checked === 'find'} color="#ec407a"/>
+                <CheckMark checked={checked === 'find'} color="#ec407a"><AiOutlineCheck/></CheckMark>
             </CheckLabel>
             <CheckLabel>
                 lost &nbsp;
                 <CheckInput type="radio" name="animal" value="lost" 
                     checked={checked === 'lost'} onChange={setChecked}/>
-                <CheckMark checked={checked === 'lost'} color="#42a5f5"/>
+                <CheckMark checked={checked === 'lost'} color="#42a5f5"><AiOutlineCheck/></CheckMark>
             </CheckLabel>
         </RadioBox>
     )

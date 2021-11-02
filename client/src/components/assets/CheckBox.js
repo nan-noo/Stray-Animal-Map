@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import {RiCheckboxBlankCircleFill, RiCheckboxBlankCircleLine} from 'react-icons/ri';
+import {AiOutlineCheck} from 'react-icons/ai';
 
 const CheckBoxBox = styled.div`
     display: flex;
@@ -22,10 +22,15 @@ const CheckInput = styled.input`
 `;
 
 const CheckMark = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     height: 1.5em;
     width: 1.5em;
     background: ${props => props.checked ? props.color: '#eeeeee'};
     border-radius: 50%;
+    color: white;
 
     &:hover{
         opacity: 0.8;
@@ -38,7 +43,7 @@ function CheckBox({checked, color, text, ...rest}) {
             <CheckLabel>
                 {text} &nbsp;
                 <CheckInput type="checkbox" checked={checked} {...rest}/>
-                <CheckMark checked={checked} color={color}/>
+                <CheckMark checked={checked} color={color}><AiOutlineCheck/></CheckMark>
             </CheckLabel>
         </CheckBoxBox>
     )
