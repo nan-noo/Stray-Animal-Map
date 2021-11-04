@@ -32,8 +32,9 @@ function ReplyComment({commentList, parentCommentId, postId, refreshFunction}) {
     return (
         <div>
             {childCommentNum > 0 && 
-                <p style={{fontSize: '14px', margin: 0, color: 'gray'}}
-                onClick={() => setOpenReplyComment(!openReplyComment)}
+                <p 
+                    style={{fontSize: '14px', margin: 0, color: 'gray'}}
+                    onClick={() => setOpenReplyComment(!openReplyComment)}
                 >
                     View {childCommentNum} more comment(s)
                 </p>

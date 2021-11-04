@@ -20,13 +20,15 @@ export const PrimaryButton = styled.button`
 `;
 
 export const SecondaryButton = styled.button`
+    width: ${props => props.width}
     height: 100%;
 
     padding: 0.2em 0.9em;
 
     background: white;
-    border-radius: 10px;
-    border: none;
+    color: #aeaeae;
+    border-radius: 5px;
+    border: 1px solid #e0e0e0;
     outline: none;
 
     &:hover{

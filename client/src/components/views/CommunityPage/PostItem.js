@@ -8,6 +8,7 @@ const ItemBox = styled.div`
     flex-direction: column;
     justify-content: space-around;
 
+    height: 20em;
     margin: 0.9em;
     padding: 0.5em;
 
@@ -24,9 +25,12 @@ const ItemBox = styled.div`
 `;
 
 const Image = styled.img`
-    height: 30%;
+    height: 35%;
     width: 100%;
     margin: 0.9em auto;
+    border-radius: 5px;
+
+    object-fit: fill;
 `;
 
 const TextBox = styled.div`
@@ -54,7 +58,7 @@ function PostItem({item}) {
                 
                 <TextBox>
                     <h2>{title}</h2>
-                    <p>{location}</p>
+                    <p>{`${location.slice(0,15)}...`}</p>
                     <p>{`${content.slice(0,15)}...`}</p>
                 </TextBox>
             </ItemBox>

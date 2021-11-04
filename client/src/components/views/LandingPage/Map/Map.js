@@ -65,17 +65,21 @@ function Map({posts, checked1, checked2, setChecked1, setChecked2, setMapBounds}
         const inputPlace = searchBox.getPlaces()[0].geometry.location;
         dispatch({type: 'UPDATE_CENTER', lat: inputPlace.lat(), lng: inputPlace.lng()})
     };
+    const onGoogleMapClick = e => {
+        console.log(e.latLng.lat(), e.latLng.lng());
+    };
 
     return isLoaded ? (
                 <GoogleMap
                     mapContainerStyle={containerStyle}
                     center={center}
-                    zoom={12}
+                    zoom={8}
                     options={{
                         styles: mapStyle
                     }}
                     onLoad={onGoogleMapLoad}
                     onBoundsChanged={() => {setMapBounds(googleMap.getBounds());}}
+                    onClick={onGoogleMapClick}
                 >
                     {/* Search Bar */}
                     <StandaloneSearchBox
@@ -99,6 +103,7 @@ function Map({posts, checked1, checked2, setChecked1, setChecked2, setMapBounds}
                     {address && 
                         <InfoWindow
                             position={center}
+                            onCloseClick={()=>{ setAddress(''); }}
                         >   
                             <Link to={{
                                 pathname: '/upload',
@@ -126,7 +131,7 @@ function Map({posts, checked1, checked2, setChecked1, setChecked2, setMapBounds}
                         else return <></>;       
                     })}
                 </GoogleMap>
-    ) : <p>Loading...</p>
+    ) : <p>Loading...</p>;
 }
 
 export default Map;

@@ -1,10 +1,7 @@
 import React, {useState} from 'react';
-import { Link } from 'react-router-dom';
 import styled, {css} from 'styled-components';
-import {AiOutlinePlus} from 'react-icons/ai';
 
 import Items from './Items';
-import {SecondaryButton} from '../../../assets/Buttons';
 
 const OnOffButton = styled.button`
     position: absolute;
@@ -84,7 +81,7 @@ const GridBox = styled.div`
 function GridMenu({posts, checked1, checked2, mapBounds}) {
     const [close, setClose] = useState(false);
     
-    return (
+    return mapBounds ? (
         <>
             <OnOffButton close={close} onClick={() => setClose(!close)}>
                 &lt;
@@ -92,14 +89,11 @@ function GridMenu({posts, checked1, checked2, mapBounds}) {
             <GridBox close={close}>
                 <GridBar>
                     <div>found {posts.filter(post => mapBounds.contains(post.latLng)).length} results</div>
-                    <Link to="/upload" style={{color: 'black'}}>
-                        <SecondaryButton><AiOutlinePlus/>Add</SecondaryButton>
-                    </Link>
                 </GridBar>
                 <Items checked1={checked1} checked2={checked2} posts={posts} mapBounds={mapBounds}/>
             </GridBox>
         </>
-    );
+    ) : <p>Loading...</p>;
 }
 
 export default GridMenu;

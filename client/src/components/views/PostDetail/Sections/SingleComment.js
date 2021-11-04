@@ -4,6 +4,8 @@ import {Comment, Avatar, Button, Input} from 'antd';
 import axios from 'axios';
 import {COMMENT_SERVER} from '../../../Config';
 
+import { SecondaryButton } from '../../../assets/Buttons';
+
 const {TextArea} = Input;
 
 function SingleComment({comment, postId, refreshFunction}) { // 댓글과 대댓글작성form
@@ -53,10 +55,10 @@ function SingleComment({comment, postId, refreshFunction}) { // 댓글과 대댓
                         style={{width: '100%', borderRadius: '5px'}}
                         onChange={e => setCommentValue(e.currentTarget.value)}
                         value={commentValue}
-                        placeholder= 'write a comment'
+                        placeholder= '대댓글을 작성해주세요.'
                     />
                     <br/>
-                    <Button style={{width: '15%', height: '52px', marginLeft: '10px'}} onClick={onSubmit}>Submit</Button>
+                    <SecondaryButton width="15%" onClick={onSubmit}>Submit</SecondaryButton>
                 </form>
             }
             

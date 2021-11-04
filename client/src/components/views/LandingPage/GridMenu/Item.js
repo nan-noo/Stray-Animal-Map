@@ -8,6 +8,7 @@ const ItemBox = styled.div`
     justify-content: space-around;
     align-items: center;
 
+    height: 10em;
     margin: 0.9em;
     padding: 0.5em;
 
@@ -25,7 +26,11 @@ const ItemBox = styled.div`
 
 const Image = styled.img`
     width: 20%;
+    height: 100%;
     margin: 0.9em;
+    object-fit: contain;
+
+    border-radius: 5px;
 `;
 
 const TextBox = styled.div`
