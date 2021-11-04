@@ -46,7 +46,7 @@ const containerStyle = {
     flexGrow: 1,
 };
 
-function Map({posts, checked1, checked2, setChecked1, setChecked2, setMapBounds}) {
+function Map({checked1, checked2, setChecked1, setChecked2}) {
     const { isLoaded } = useJsApiLoader({
         id: 'google-map-script',
         googleMapsApiKey: GOOGLE_API_KEY,
@@ -56,9 +56,12 @@ function Map({posts, checked1, checked2, setChecked1, setChecked2, setMapBounds}
     const [searchBox, setSearchBox] = useState(null);
     const [address, setAddress] = useState('');
     const dispatch = useMapDispatch();
-    const {center} = useMapState();
+    const {center, posts} = useMapState();
 
-    const onGoogleMapLoad = map => { setGoogleMap(map); setMapBounds(map.getBounds()); };
+    const onGoogleMapLoad = map => { 
+        setGoogleMap(map); 
+        dispatch({type: 'UPDATE_BOUNDS', bounds: map.getBounds()});
+    };
     const onSearchBoxLoad = ref => { setSearchBox(ref); };
     const onPlacesChanged = () => {
         setAddress(searchBox.getPlaces()[0].formatted_address);
@@ -73,12 +76,12 @@ function Map({posts, checked1, checked2, setChecked1, setChecked2, setMapBounds}
                 <GoogleMap
                     mapContainerStyle={containerStyle}
                     center={center}
-                    zoom={8}
+                    zoom={10}
                     options={{
                         styles: mapStyle
                     }}
                     onLoad={onGoogleMapLoad}
-                    onBoundsChanged={() => {setMapBounds(googleMap.getBounds());}}
+                    onBoundsChanged={() => {dispatch({type: 'UPDATE_BOUNDS', bounds: googleMap.getBounds()});}}
                     onClick={onGoogleMapClick}
                 >
                     {/* Search Bar */}

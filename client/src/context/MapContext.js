@@ -5,15 +5,30 @@ const initialMap = {
         lat: 37.5866076,
         lng: 126.974811
     },
+    posts: [],
+    bounds: null,
 };
 
 function mapReducer(state, action){
     switch(action.type){
         case 'UPDATE_CENTER':
             return {
+                ...state,
                 center: {
                     lat: action.lat, lng: action.lng
-                }
+                },
+            };
+        case 'UPDATE_POSTS':
+            return {
+                ...state,
+                posts: [
+                    ...action.posts
+                ],
+            };
+        case 'UPDATE_BOUNDS':
+            return {
+                ...state,
+                bounds: action.bounds,
             };
         default:
             throw new Error(`Unhandled action type: ${action.type}`);
@@ -53,5 +68,5 @@ export default function MapProvider({children}) {
                 </MapNextIdContext.Provider>
             </MapDispatchContext.Provider>
         </MapStateContext.Provider>
-    )
+    );
 }

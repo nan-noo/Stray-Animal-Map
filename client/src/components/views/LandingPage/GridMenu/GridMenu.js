@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import styled, {css} from 'styled-components';
+import { useMapState } from '../../../../context/MapContext';
 
 import Items from './Items';
 
@@ -78,19 +79,20 @@ const GridBox = styled.div`
     }
 `;
 
-function GridMenu({posts, checked1, checked2, mapBounds}) {
+function GridMenu({checked1, checked2}) {
     const [close, setClose] = useState(false);
+    const {posts, bounds} = useMapState();
     
-    return mapBounds ? (
+    return bounds ? (
         <>
             <OnOffButton close={close} onClick={() => setClose(!close)}>
                 &lt;
             </OnOffButton>
             <GridBox close={close}>
                 <GridBar>
-                    <div>found {posts.filter(post => mapBounds.contains(post.latLng)).length} results</div>
+                    <div>found {posts.filter(post => bounds.contains(post.latLng)).length} results</div>
                 </GridBar>
-                <Items checked1={checked1} checked2={checked2} posts={posts} mapBounds={mapBounds}/>
+                <Items checked1={checked1} checked2={checked2} posts={posts} mapBounds={bounds}/>
             </GridBox>
         </>
     ) : <p>Loading...</p>;
