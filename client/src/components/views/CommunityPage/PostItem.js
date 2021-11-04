@@ -9,6 +9,7 @@ const ItemBox = styled.div`
     justify-content: space-around;
 
     height: 20em;
+    width: 15em;
     margin: 0.9em;
     padding: 0.5em;
 

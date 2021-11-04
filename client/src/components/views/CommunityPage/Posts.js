@@ -4,7 +4,6 @@ import axios from '../../../axios';
 
 import PostItem from './PostItem';
 import { POST_SERVER } from '../../Config';
-import { useMapState } from '../../../context/MapContext';
 
 const PostsBox = styled.div`
     display: grid;
@@ -20,7 +19,14 @@ const PostsBox = styled.div`
 `;
 
 function Posts() {
-    const {posts} = useMapState();
+    const [posts, setPosts] = useState([]);
+
+    useEffect(() => {
+        axios.get(`${POST_SERVER}/getPosts`)
+            .then(response => {
+                response.data.success ? setPosts(response.data.posts) : alert('Faile to get posts');
+            });
+    }, []);
 
     return (
         <PostsBox>
