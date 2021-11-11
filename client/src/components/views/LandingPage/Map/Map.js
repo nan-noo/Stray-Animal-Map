@@ -4,16 +4,17 @@ import {
     GoogleMap, InfoWindow, Marker, StandaloneSearchBox,
     useJsApiLoader 
 } from '@react-google-maps/api';
+import Geocode from "react-geocode";
 import styled from 'styled-components';
 import {IoSearchOutline} from 'react-icons/io5';
 
 import mapStyle from './style/mapStyle';
 import libraries from './libraries/libraries';
-import CheckBox from '../../../assets/CheckBox';
+import CheckBox from '../../../../assets/CheckBox';
 import {GOOGLE_API_KEY} from '../../../../secret';
 import { useMapState, useMapDispatch } from '../../../../context/MapContext';
-import findIcon from '../../../assets/images/findIcon.svg';
-import lostIcon from '../../../assets/images/lostIcon.svg';
+import findIcon from '../../../../assets/images/findIcon.svg';
+import lostIcon from '../../../../assets/images/lostIcon.svg';
 
 const SearchBar = styled.div`
     position: absolute;
@@ -46,6 +47,20 @@ const containerStyle = {
     flexGrow: 1,
 };
 
+async function getGeocode(lat, lng){
+    Geocode.setApiKey(GOOGLE_API_KEY);
+    Geocode.setLanguage("ko");
+    Geocode.setRegion("kr");
+    Geocode.setLocationType("ROOFTOP"); // most accurate result
+    try{
+        const response = await Geocode.fromLatLng(String(lat), String(lng));
+        return response.results[0].formatted_address;
+    }
+    catch{
+        console.error('Failed to get geocode from latLng');
+    }
+}
+
 function Map({checked1, checked2, setChecked1, setChecked2}) {
     const { isLoaded } = useJsApiLoader({
         id: 'google-map-script',
@@ -55,6 +70,7 @@ function Map({checked1, checked2, setChecked1, setChecked2}) {
     const [googleMap, setGoogleMap] = useState(null);
     const [searchBox, setSearchBox] = useState(null);
     const [address, setAddress] = useState('');
+    const [infoLocation, setInfoLocation] = useState({})
     const dispatch = useMapDispatch();
     const {center, posts} = useMapState();
 
@@ -64,12 +80,13 @@ function Map({checked1, checked2, setChecked1, setChecked2}) {
     };
     const onSearchBoxLoad = ref => { setSearchBox(ref); };
     const onPlacesChanged = () => {
-        setAddress(searchBox.getPlaces()[0].formatted_address);
         const inputPlace = searchBox.getPlaces()[0].geometry.location;
         dispatch({type: 'UPDATE_CENTER', lat: inputPlace.lat(), lng: inputPlace.lng()})
     };
-    const onGoogleMapClick = e => {
-        console.log(e.latLng.lat(), e.latLng.lng());
+    const onGoogleMapClick = async e => {
+        const location = await getGeocode(e.latLng.lat(), e.latLng.lng());
+        setInfoLocation({lat: e.latLng.lat(), lng: e.latLng.lng()})
+        setAddress(location);
     };
 
     return isLoaded ? (
@@ -105,7 +122,7 @@ function Map({checked1, checked2, setChecked1, setChecked2}) {
                     {/* info items */}
                     {address && 
                         <InfoWindow
-                            position={center}
+                            position={infoLocation}
                             onCloseClick={()=>{ setAddress(''); }}
                         >   
                             <Link to={{
