@@ -46,7 +46,7 @@ const TextBox = styled.div`
 `;
 
 function PostItem({item}) {
-    const {_id, img, title, location, type, content} = item;
+    const {_id, img, title, location, type, content, animal_type} = item;
     const color = type === 'find' ? '#ec407a' : '#42a5f5';
     
     return (
@@ -59,6 +59,7 @@ function PostItem({item}) {
                 
                 <TextBox>
                     <h2>{title}</h2>
+                    <p>{animal_type}</p>
                     <p>{`${location.slice(0,15)}...`}</p>
                     <p>{`${content.slice(0,15)}...`}</p>
                 </TextBox>

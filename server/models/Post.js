@@ -14,6 +14,7 @@ const postSchema = mongoose.Schema({
     },
     img: String,
     type: String,
+    animal_type: String,
     location: String,
     latLng: {
         type: Object,

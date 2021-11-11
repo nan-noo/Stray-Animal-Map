@@ -101,6 +101,7 @@ function PostDetail() {
                             <TextBox>
                                 <h2>{post.title}</h2>
                                 <p>{post.location}</p>
+                                <p>{post.animal_type}</p>
                             </TextBox>
                         </BoxHeader>
                         <BoxBody>{post.content}</BoxBody>

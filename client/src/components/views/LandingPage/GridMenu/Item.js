@@ -42,7 +42,7 @@ const TextBox = styled.div`
 `;
 
 function Item({item}) {
-    const {_id, img, title, location, type} = item;
+    const {_id, img, title, location, type, animal_type} = item;
     const color = type === 'find' ? '#ec407a' : '#42a5f5';
 
     return (
@@ -56,6 +56,7 @@ function Item({item}) {
                 <TextBox>
                     <h2>{title}</h2>
                     <p>{location}</p>
+                    <p>{animal_type}</p>
                 </TextBox>
             </ItemBox>
         </Link>
