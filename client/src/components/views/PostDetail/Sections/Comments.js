@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { COMMENT_SERVER } from '../../../Config';
 import SingleComment from './SingleComment';
 import ReplyComment from './ReplyComment';
-import { PrimaryButton } from '../../../assets/Buttons';
+import { PrimaryButton } from '../../../../assets/Buttons';
 
 const CommentsBox = styled.div`
     width: 80%;

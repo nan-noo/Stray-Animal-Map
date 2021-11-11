@@ -8,8 +8,8 @@ import axios from '../../../axios';
 import {POST_SERVER} from '../../Config';
 import {GOOGLE_API_KEY} from '../../../secret';
 
-import { PrimaryButton } from '../../assets/Buttons';
-import RadioButton from '../../assets/RadioButton';
+import { PrimaryButton } from '../../../assets/Buttons';
+import RadioButton from '../../../assets/RadioButton';
 
 const UploadBox = styled.div`
     display: flex;
@@ -112,7 +112,7 @@ function UploadPage() {
                     <InputBox type="text" placeholder="제목을 작성해주세요: 글자수제한(50)"
                         name="title" value={title} onChange={onInputChange}
                     />
-                    <InputBox type="text" placeholder="위치를 작성해주세요" 
+                    <InputBox type="text" placeholder="위치를 작성해주세요" disabled
                         name="location" value={location} onChange={onInputChange}
                     />
                     <RadioButton checked={type} setChecked={onCheckedHandler}/>

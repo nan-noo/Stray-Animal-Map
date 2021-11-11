@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import {useSelector} from 'react-redux';
-import {Comment, Avatar, Button, Input} from 'antd';
+import {Comment, Avatar, Input} from 'antd';
 import axios from 'axios';
 import {COMMENT_SERVER} from '../../../Config';
 
-import { SecondaryButton } from '../../../assets/Buttons';
+import { SecondaryButton } from '../../../../assets/Buttons';
 
 const {TextArea} = Input;
 

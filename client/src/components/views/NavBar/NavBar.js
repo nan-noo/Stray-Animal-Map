@@ -5,7 +5,7 @@ import styled, {css} from 'styled-components';
 import { Link, useHistory } from 'react-router-dom';
 import {FiMenu} from 'react-icons/fi';
 
-import { LineButton, DrawerButton } from '../../assets/Buttons';
+import { LineButton, DrawerButton } from '../../../assets/Buttons';
 import {USER_SERVER} from '../../Config';
 
 const NavBox = styled.nav`

@@ -5,7 +5,7 @@ import {Formik} from 'formik';
 import * as Yup from 'yup';
 
 import {loginUser} from '../../../_actions/user_actions';
-import { PrimaryButton, LinkButton } from '../../assets/Buttons';
+import { PrimaryButton, LinkButton } from '../../../assets/Buttons';
 
 import {Form, Input, Typography, Checkbox} from 'antd';
 import {MailOutlined, LockOutlined, EyeInvisibleOutlined, EyeTwoTone,} from '@ant-design/icons';

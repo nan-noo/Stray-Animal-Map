@@ -6,7 +6,7 @@ import moment from 'moment';
 import {useDispatch} from 'react-redux';
 
 import {registerUser} from '../../../_actions/user_actions';
-import { PrimaryButton, LinkButton } from '../../assets/Buttons';
+import { PrimaryButton, LinkButton } from '../../../assets/Buttons';
 
 import {Form, Input, Typography} from 'antd';
 import {UserOutlined, LockOutlined, MailOutlined, UnlockOutlined,
