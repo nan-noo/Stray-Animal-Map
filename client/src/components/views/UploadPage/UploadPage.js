@@ -10,6 +10,7 @@ import {GOOGLE_API_KEY} from '../../../secret';
 
 import { PrimaryButton } from '../../../assets/Buttons';
 import RadioButton from '../../../assets/RadioButton';
+import DropZone from './DropZone';
 
 const UploadBox = styled.div`
     display: flex;
@@ -109,6 +110,7 @@ function UploadPage() {
                 <h2>Upload Post</h2>
                 {/* title, img, content, location, type */}
                 <FormBox onSubmit={onSubmit}>
+                    <DropZone img={img}/>
                     <InputBox type="text" placeholder="제목을 작성해주세요: 글자수제한(50)"
                         name="title" value={title} onChange={onInputChange}
                     />
@@ -121,7 +123,7 @@ function UploadPage() {
                 </FormBox>
             </UploadBox>  
         </div>
-    )
+    );
 }
 
 export default UploadPage
