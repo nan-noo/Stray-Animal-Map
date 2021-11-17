@@ -77,17 +77,18 @@ function UploadPage() {
     const _location = useLocation();
     const user = useSelector(state => state.user);
     const [inputs, setInputs] = useState({
-        title: '', img: '', content: '', location: _location.state?.address || '',
+        title: '', content: '', location: _location.state?.address || '',
     });
-    const {title, img, content, location} = inputs;
+    const {title, content, location} = inputs;
+    const [img, setImg] = useState('');
     const [type, setType] = useState('find');
 
     const onSubmit = async e => {
         e.preventDefault();
 
         if(location && title){
-            const data = { ...inputs, type, writer: user.userData._id, latLng: await getGeocode(location)}
-            const response = await axios.post(`${POST_SERVER}/uploadPost`, data);
+            const data = { ...inputs, img, type, writer: user.userData._id, latLng: await getGeocode(location)}
+            const response = await axios.post(`${POST_SERVER}/post`, data);
             response.data.success ? history.push('/') : alert('Failed to upload post');
         }
         else{
@@ -100,9 +101,7 @@ function UploadPage() {
         setInputs(prevState => ({ ...prevState, [name]: value }));
     };
 
-    const onCheckedHandler = e => {
-        setType(e.target.value);
-    }
+    const onCheckedHandler = e => setType(e.target.value);
 
     return (
         <div className="app">
@@ -110,11 +109,11 @@ function UploadPage() {
                 <h2>Upload Post</h2>
                 {/* title, img, content, location, type */}
                 <FormBox onSubmit={onSubmit}>
-                    <DropZone img={img}/>
-                    <InputBox type="text" placeholder="제목을 작성해주세요: 글자수제한(50)"
+                    <DropZone setImg={setImg}/>
+                    <InputBox type="text" placeholder="*제목을 작성해주세요: 글자수제한(50)"
                         name="title" value={title} onChange={onInputChange}
                     />
-                    <InputBox type="text" placeholder="위치를 작성해주세요" disabled
+                    <InputBox type="text" disabled
                         name="location" value={location} onChange={onInputChange}
                     />
                     <RadioButton checked={type} setChecked={onCheckedHandler}/>

@@ -1,6 +1,15 @@
-import React, {useCallback} from 'react';
+import React, {useCallback, useState} from 'react';
 import {useDropzone} from 'react-dropzone';
 import styled from 'styled-components';
+import axios from '../../../axios';
+import {POST_SERVER, BASE_SERVER} from '../../Config';
+
+const Box = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`;
 
 const ZoneBox = styled.div`
     width: 100%;
@@ -14,17 +23,22 @@ const ZoneBox = styled.div`
     text-align: center;
 `;
 
-function DropZone({img}) {
-    const onDrop = useCallback(acceptedFiles => {
+function DropZone({setImg}) {
+    const [image, setImage] = useState(null)
+
+    const onDrop = useCallback(async acceptedFiles => {
+        const reader = new FileReader();
+        reader.onload = (e) => setImage(e.target.result);
+        reader.readAsDataURL(acceptedFiles[0]);
+
         const formData = new FormData();
-        const config = {
-            header: {
-                "content-type": "multipart/form-data",
-            },
-        };
+        const config = { header: { "content-type": "multipart/form-data"} };
         formData.append("file", acceptedFiles[0]);
-        console.log(acceptedFiles[0]);
-    }, [])
+        
+        const response = await axios.post(`${POST_SERVER}/image`, formData, config)
+        response.data.success ? setImg(`${BASE_SERVER}/${response.data.filePath}`) : alert('Failed to upload image..');
+    }, [setImg]);
+
     const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
 
     const InputProps = {
@@ -33,14 +47,17 @@ function DropZone({img}) {
         accept: "image/gif, image/jpg, image/jpeg, image/png",
     };
 
-    return (
-        <ZoneBox {...getRootProps()} multiple={false}>
-            <input {...InputProps} />
-            { isDragActive 
-                ? <p>Drop the Image here ...</p>
-                : <p>Drag and Drop Image here, <br/> or <br/> Click to select Image(gif, jpg, jpeg, png)</p>
-            }
-        </ZoneBox>
+    return ( 
+        <Box>
+            <ZoneBox {...getRootProps()} multiple={false}>
+                <input {...InputProps} />
+                { !image && isDragActive
+                    ? <p>Drop the Image here ...</p>
+                    : <p>Drag and Drop Image here, <br/> or <br/> Click to select Image(gif, jpg, jpeg, png)</p>
+                }
+            </ZoneBox>
+            {image && <img alt="animal" src={image} style={{width: '7em', height: '7em'}}/>}
+        </Box>
     );
 }
 

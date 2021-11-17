@@ -28,5 +28,8 @@ app.use('/api/users', userRouter);
 app.use('/api/posts', postRouter);
 app.use('/api/comments', commentRouter);
 
+// use this to show image in node.js server to client(react)
+app.use('/uploads', express.static('uploads'));
+
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Listening on port ${port}...`))
