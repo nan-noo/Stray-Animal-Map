@@ -13,8 +13,15 @@ import libraries from './libraries/libraries';
 import CheckBox from '../../../../assets/CheckBox';
 import {GOOGLE_API_KEY} from '../../../../secret';
 import { useMapState, useMapDispatch } from '../../../../context/MapContext';
-import findIcon from '../../../../assets/images/findIcon.svg';
-import lostIcon from '../../../../assets/images/lostIcon.svg';
+
+import foundDog from '../../../../assets/images/markers/found_dog.svg';
+import foundCat from '../../../../assets/images/markers/found_cat.svg';
+import foundHam from '../../../../assets/images/markers/found_hamster.svg';
+import foundEtc from '../../../../assets/images/markers/found_foot.svg';
+import lostDog from '../../../../assets/images/markers/lost_dog.svg';
+import lostCat from '../../../../assets/images/markers/lost_cat.svg';
+import lostHam from '../../../../assets/images/markers/lost_hamster.svg';
+import lostEtc from '../../../../assets/images/markers/lost_foot.svg';
 
 const SearchBar = styled.div`
     position: absolute;
@@ -89,6 +96,43 @@ function Map({checked1, checked2, setChecked1, setChecked2}) {
         setAddress(location);
     };
 
+    const importSvg = post => {
+        let icon = '';
+        if(checked1 && post.type === 'find') {
+            switch(post.animal_type){
+                case '강아지':
+                    icon = foundDog;
+                    break;
+                case '고양이':
+                    icon = foundCat;
+                    break;
+                case '햄스터':
+                    icon = foundHam;
+                    break;
+                default:
+                    icon = foundEtc;
+                    break;
+            }
+        }
+        else if(checked2 && post.type === 'lost') {
+            switch(post.animal_type){
+                case '강아지':
+                    icon = lostDog;
+                    break;
+                case '고양이':
+                    icon = lostCat;
+                    break;
+                case '햄스터':
+                    icon = lostHam;
+                    break;
+                default:
+                    icon = lostEtc;
+                    break;
+            }
+        }
+        return icon;  
+    };
+
     return isLoaded ? (
                 <GoogleMap
                     mapContainerStyle={containerStyle}
@@ -134,21 +178,12 @@ function Map({checked1, checked2, setChecked1, setChecked2}) {
                         </InfoWindow>
                     }
                     {posts.map((post, index) => {
-                        if(checked1 && post.type === 'find') {
-                            return <Marker 
-                                key={index}
-                                icon={{ url: findIcon }}
-                                position={post.latLng}
-                            />;
-                        }
-                        else if(checked2 && post.type === 'lost') {
-                            return <Marker 
-                                key={index}
-                                icon={{ url: lostIcon }}
-                                position={post.latLng}
-                            />;
-                        }
-                        else return <></>;       
+                        const icon = importSvg(post);
+                        return <Marker 
+                            key={index}
+                            icon={{url: icon}}
+                            position={post.latLng}
+                        />;
                     })}
                 </GoogleMap>
     ) : <p>Loading...</p>;
