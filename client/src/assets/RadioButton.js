@@ -44,14 +44,14 @@ function RadioButton({checked, setChecked}) {
     return (
         <RadioBox>
             <CheckLabel>
-                find &nbsp;
-                <CheckInput type="radio" name="animal" value="find" 
-                    checked={checked === 'find'} onChange={setChecked}/>
-                <CheckMark checked={checked === 'find'} color="#ec407a"><AiOutlineCheck/></CheckMark>
+                found &nbsp;
+                <CheckInput type="radio" name="type" value="found" 
+                    checked={checked === 'found'} onChange={setChecked}/>
+                <CheckMark checked={checked === 'found'} color="#ec407a"><AiOutlineCheck/></CheckMark>
             </CheckLabel>
             <CheckLabel>
                 lost &nbsp;
-                <CheckInput type="radio" name="animal" value="lost" 
+                <CheckInput type="radio" name="type" value="lost" 
                     checked={checked === 'lost'} onChange={setChecked}/>
                 <CheckMark checked={checked === 'lost'} color="#42a5f5"><AiOutlineCheck/></CheckMark>
             </CheckLabel>

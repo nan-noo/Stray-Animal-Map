@@ -11,6 +11,7 @@ import {GOOGLE_API_KEY} from '../../../secret';
 import { PrimaryButton } from '../../../assets/Buttons';
 import RadioButton from '../../../assets/RadioButton';
 import DropZone from './DropZone';
+import DropList from '../../../assets/DropList';
 
 const UploadBox = styled.div`
     display: flex;
@@ -58,6 +59,11 @@ const ContentArea = styled.textarea`
     background: #fafafa;
 `;
 
+const CheckList = styled.div`
+    display: flex;
+    justify-content: flex-start;
+`;
+
 async function getGeocode(location){
     Geocode.setApiKey(GOOGLE_API_KEY);
     Geocode.setLanguage("ko");
@@ -76,12 +82,14 @@ function UploadPage() {
     const history = useHistory();
     const _location = useLocation();
     const user = useSelector(state => state.user);
+
     const [inputs, setInputs] = useState({
-        title: '', content: '', location: _location.state?.address || '',
+        title: '', content: '', 
+        location: _location.state?.address || '', 
+        type: 'found', animal_type: '강아지',
     });
-    const {title, content, location} = inputs;
+    const {title, content, location, type, animal_type} = inputs;
     const [file, setFile] = useState('');
-    const [type, setType] = useState('find');
 
     const uploadImage = async file => {
         const formData = new FormData();
@@ -100,7 +108,7 @@ function UploadPage() {
 
         if(location && title){
             const img = file && await uploadImage(file);
-            const data = { ...inputs, img, type, writer: user.userData._id, latLng: await getGeocode(location)}
+            const data = { ...inputs, img, writer: user.userData._id, latLng: await getGeocode(location)}
             const response = await axios.post(`${POST_SERVER}/post`, data);
             response.data.success ? history.push('/') : alert('Failed to upload post');
         }
@@ -113,8 +121,6 @@ function UploadPage() {
         const {name, value} = e.target;
         setInputs(prevState => ({ ...prevState, [name]: value }));
     };
-
-    const onCheckedHandler = e => setType(e.target.value);
 
     return (
         <div className="app">
@@ -129,7 +135,10 @@ function UploadPage() {
                     <InputBox type="text" disabled
                         name="location" value={location} onChange={onInputChange}
                     />
-                    <RadioButton checked={type} setChecked={onCheckedHandler}/>
+                    <CheckList>
+                        <RadioButton checked={type} setChecked={onInputChange}/>
+                        <DropList selected={animal_type} onChange={onInputChange}/>
+                    </CheckList>
                     <ContentArea name="content" value={content} onChange={onInputChange} placeholder="내용을 작성해주세요" maxLength="2000"/>
                     <PrimaryButton>upload</PrimaryButton>
                 </FormBox>

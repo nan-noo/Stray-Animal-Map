@@ -9,6 +9,7 @@ import { useMapDispatch } from '../../../context/MapContext';
 function LandingPage() {
     const [checked1, setChecked1] = useState(true);
     const [checked2, setChecked2] = useState(true);
+    const [selected, setSelected] = useState('전체');
     const dispatch = useMapDispatch();
 
     useEffect(() => {
@@ -26,8 +27,8 @@ function LandingPage() {
             display: 'flex',
             flexDirection: 'row'
         }}>
-            <Map checked1={checked1} checked2={checked2} setChecked1={setChecked1} setChecked2={setChecked2}/>
-            <GridMenu checked1={checked1} checked2={checked2}/>
+            <Map checked1={checked1} checked2={checked2} setChecked1={setChecked1} setChecked2={setChecked2} selected={selected}/>
+            <GridMenu checked1={checked1} checked2={checked2} selected={selected} setSelected={setSelected}/>
         </div>
 
     );

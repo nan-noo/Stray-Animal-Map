@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import styled, {css} from 'styled-components';
+import DropList from '../../../../assets/DropList';
 import { useMapState } from '../../../../context/MapContext';
 
 import Items from './Items';
@@ -79,9 +80,11 @@ const GridBox = styled.div`
     }
 `;
 
-function GridMenu({checked1, checked2}) {
+function GridMenu({checked1, checked2, selected, setSelected}) {
     const [close, setClose] = useState(false);
     const {posts, bounds} = useMapState();
+
+    const onChange = e => setSelected(e.target.value);
     
     return bounds ? (
         <>
@@ -91,8 +94,9 @@ function GridMenu({checked1, checked2}) {
             <GridBox close={close}>
                 <GridBar>
                     <div>found {posts.filter(post => bounds.contains(post.latLng)).length} results</div>
+                    <DropList selected={selected} onChange={onChange} isAll/>
                 </GridBar>
-                <Items checked1={checked1} checked2={checked2} posts={posts} mapBounds={bounds}/>
+                <Items checked1={checked1} checked2={checked2} posts={posts} mapBounds={bounds} selected={selected}/>
             </GridBox>
         </>
     ) : <p>Loading...</p>;

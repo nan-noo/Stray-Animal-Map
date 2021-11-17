@@ -68,7 +68,7 @@ async function getGeocode(lat, lng){
     }
 }
 
-function Map({checked1, checked2, setChecked1, setChecked2}) {
+function Map({checked1, checked2, setChecked1, setChecked2, selected}) {
     const { isLoaded } = useJsApiLoader({
         id: 'google-map-script',
         googleMapsApiKey: GOOGLE_API_KEY,
@@ -96,10 +96,10 @@ function Map({checked1, checked2, setChecked1, setChecked2}) {
         setAddress(location);
     };
 
-    const importSvg = post => {
+    const importSvg = (type, animalType) => {
         let icon = '';
-        if(checked1 && post.type === 'find') {
-            switch(post.animal_type){
+        if(type === 'found') {
+            switch(animalType){
                 case '강아지':
                     icon = foundDog;
                     break;
@@ -114,8 +114,8 @@ function Map({checked1, checked2, setChecked1, setChecked2}) {
                     break;
             }
         }
-        else if(checked2 && post.type === 'lost') {
-            switch(post.animal_type){
+        else if(type === 'lost') {
+            switch(animalType){
                 case '강아지':
                     icon = lostDog;
                     break;
@@ -178,12 +178,38 @@ function Map({checked1, checked2, setChecked1, setChecked2}) {
                         </InfoWindow>
                     }
                     {posts.map((post, index) => {
-                        const icon = importSvg(post);
-                        return <Marker 
-                            key={index}
-                            icon={{url: icon}}
-                            position={post.latLng}
-                        />;
+                        if(selected === '전체'){
+                            if(checked1 && post.type === 'found') {
+                                return <Marker 
+                                    key={index}
+                                    icon={{url: importSvg(post.type, post.animal_type)}}
+                                    position={post.latLng}
+                                />;
+                            }
+                            else if(checked2 && post.type === 'lost') {
+                                return <Marker 
+                                    key={index}
+                                    icon={{url: importSvg(post.type, post.animal_type)}}
+                                    position={post.latLng}
+                                />;
+                            }
+                        }
+                        else {
+                            if(checked1 && post.type === 'found' && selected === post.animal_type) {
+                                return <Marker 
+                                    key={index}
+                                    icon={{url: importSvg(post.type, post.animal_type)}}
+                                    position={post.latLng}
+                                />;
+                            }
+                            else if(checked2 && post.type === 'lost' && selected === post.animal_type) {
+                                return <Marker 
+                                    key={index}
+                                    icon={{url: importSvg(post.type, post.animal_type)}}
+                                    position={post.latLng}
+                                />;
+                            }
+                        }
                     })}
                 </GoogleMap>
     ) : <p>Loading...</p>;
