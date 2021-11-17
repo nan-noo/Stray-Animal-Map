@@ -10,9 +10,11 @@ const Container = styled.div`
 `;
 
 function Items({checked1, checked2, posts, mapBounds, selected}) {
+    
     return (
         <Container>
-            {posts.filter(post => mapBounds.contains(post.latLng))
+            {posts
+                .filter(post => mapBounds.contains(post.latLng))
                 .map((post, index) => {
                     if(selected === '전체'){
                         if(checked1 && post.type === 'found') return <Item key={index} item={post}/>;

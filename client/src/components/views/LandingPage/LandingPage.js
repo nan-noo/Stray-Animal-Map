@@ -15,7 +15,7 @@ function LandingPage() {
     useEffect(() => {
         axios.get(`${POST_SERVER}/posts`)
             .then(response => {
-                response.data.success ? dispatch({type: 'UPDATE_POSTS', posts: response.data.posts}) : alert('Faile to get posts');
+                response.data.success ? dispatch({type: 'UPDATE_POSTS', posts: response.data.posts.reverse()}) : alert('Faile to get posts');
             });
     }, [dispatch]);
 

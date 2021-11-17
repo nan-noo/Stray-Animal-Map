@@ -24,7 +24,7 @@ function Posts() {
     useEffect(() => {
         axios.get(`${POST_SERVER}/posts`)
             .then(response => {
-                response.data.success ? setPosts(response.data.posts) : alert('Faile to get posts');
+                response.data.success ? setPosts(response.data.posts.reverse()) : alert('Faile to get posts');
             });
     }, []);
 
