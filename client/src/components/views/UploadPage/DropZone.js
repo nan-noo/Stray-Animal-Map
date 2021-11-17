@@ -1,17 +1,19 @@
 import React, {useCallback, useState} from 'react';
 import {useDropzone} from 'react-dropzone';
 import styled from 'styled-components';
-import axios from '../../../axios';
-import {POST_SERVER, BASE_SERVER} from '../../Config';
 
 const Box = styled.div`
     width: 100%;
     display: flex;
-    flex-direction: column;
     align-items: center;
+
+    @media only screen and (max-width: 48rem) {
+        flex-direction: column;
+    }
 `;
 
 const ZoneBox = styled.div`
+    flex-grow: 1;
     width: 100%;
     height: 7em;
     padding: .9em;
@@ -21,6 +23,22 @@ const ZoneBox = styled.div`
     font-size: 1.8rem;
     color: #aeaeae;
     text-align: center;
+
+    @media only screen and (max-width: 48rem) {
+        font-size: 0.9rem;
+        height: 100%;
+    }
+`;
+
+const Image = styled.img`
+    width: 30%;
+    margin-right: 2em;
+    border-radius: 3%;
+    
+    @media only screen and (max-width: 48rem) {
+        margin: 1em 0 0;
+        order: 2;
+    }
 `;
 
 function DropZone({setImg}) {
@@ -30,13 +48,8 @@ function DropZone({setImg}) {
         const reader = new FileReader();
         reader.onload = (e) => setImage(e.target.result);
         reader.readAsDataURL(acceptedFiles[0]);
+        setImg(acceptedFiles[0]);
 
-        const formData = new FormData();
-        const config = { header: { "content-type": "multipart/form-data"} };
-        formData.append("file", acceptedFiles[0]);
-        
-        const response = await axios.post(`${POST_SERVER}/image`, formData, config)
-        response.data.success ? setImg(`${BASE_SERVER}/${response.data.filePath}`) : alert('Failed to upload image..');
     }, [setImg]);
 
     const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
@@ -49,6 +62,7 @@ function DropZone({setImg}) {
 
     return ( 
         <Box>
+            {image && <Image alt="animal" src={image}/>}
             <ZoneBox {...getRootProps()} multiple={false}>
                 <input {...InputProps} />
                 { !image && isDragActive
@@ -56,7 +70,6 @@ function DropZone({setImg}) {
                     : <p>Drag and Drop Image here, <br/> or <br/> Click to select Image(gif, jpg, jpeg, png)</p>
                 }
             </ZoneBox>
-            {image && <img alt="animal" src={image} style={{width: '7em', height: '7em'}}/>}
         </Box>
     );
 }
