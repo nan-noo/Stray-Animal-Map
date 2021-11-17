@@ -22,7 +22,7 @@ function Posts() {
     const [posts, setPosts] = useState([]);
 
     useEffect(() => {
-        axios.get(`${POST_SERVER}/getPosts`)
+        axios.get(`${POST_SERVER}/posts`)
             .then(response => {
                 response.data.success ? setPosts(response.data.posts) : alert('Faile to get posts');
             });

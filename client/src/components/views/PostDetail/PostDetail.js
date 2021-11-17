@@ -65,7 +65,7 @@ function PostDetail() {
     const params = useParams();
 
     useEffect(() => {
-        axios.post(`${POST_SERVER}/getPost`, {postId: params.postId})
+        axios.get(`${POST_SERVER}/post?postId=${params.postId}`)
             .then(response => {
                 response.data.success ? setPost(response.data.post) : alert('Failed to get post');
             })
