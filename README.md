@@ -62,14 +62,14 @@ SPA using react-router-dom
 
 ## Functions
 
-[x] Login & Register  
-[x] Search Location  
-[x] Geocode Location, LatLng  
-[x] Upload Post through Map onClick Event  
-[x] List Posts filtered by Map-Bound, Type-Checkbox and Animal-Type-DropList  
-[x] Comments  
-[x] Responsive Web  
-[ ] Choose whether to disclose user info(email) or not
+- [x] Login & Register  
+- [x] Search Location  
+- [x] Geocode Location, LatLng  
+- [x] Upload Post through Map onClick Event  
+- [x] List Posts filtered by Map-Bound, Type-Checkbox and Animal-Type-DropList  
+- [x] Comments  
+- [x] Responsive Web  
+- [ ] Choose whether to disclose user info(email) or not
 
 ---
 
