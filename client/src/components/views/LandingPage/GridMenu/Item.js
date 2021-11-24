@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import {FaDog} from 'react-icons/fa';
 import PinkFoot from '../../../../assets/images/pink_foot.svg';
 import BlueFoot from '../../../../assets/images/blue_foot.svg';
 
