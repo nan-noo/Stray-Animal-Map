@@ -44,7 +44,12 @@ const InputBox = styled.input`
 
     border-radius: 5px;
     border: 1px solid #eeeeee;
+    outline: none;
     background: #fafafa;
+
+    &:hover{
+        border: 1px solid #ec407a;
+    }
 `;
 
 const ContentArea = styled.textarea`
@@ -56,7 +61,12 @@ const ContentArea = styled.textarea`
 
     border-radius: 5px;
     border: 1px solid #eeeeee;
+    outline: none;
     background: #fafafa;
+
+    &:hover{
+        border: 1px solid #ec407a;
+    }
 `;
 
 const CheckList = styled.div`
@@ -84,11 +94,12 @@ function UploadPage() {
     const user = useSelector(state => state.user);
 
     const [inputs, setInputs] = useState({
-        title: '', content: '', 
+        title: '',
         location: _location.state?.address || '', 
-        type: 'found', animal_type: '강아지',
+        type: 'found', animal_type: '강아지', contact: '',
     });
-    const {title, content, location, type, animal_type} = inputs;
+    const {title, location, type, animal_type, contact} = inputs;
+    const [content, setContent] = useState('');
     const [file, setFile] = useState('');
 
     const uploadImage = async file => {
@@ -108,7 +119,7 @@ function UploadPage() {
 
         if(location && title){
             const img = file && await uploadImage(file);
-            const data = { ...inputs, img, writer: user.userData._id, latLng: await getGeocode(location)}
+            const data = { ...inputs, content, img, writer: user.userData._id, latLng: await getGeocode(location)}
             const response = await axios.post(`${POST_SERVER}/post`, data);
             response.data.success ? history.push('/') : alert('Failed to upload post');
         }
@@ -129,11 +140,14 @@ function UploadPage() {
                 {/* title, img, content, location, type */}
                 <FormBox onSubmit={onSubmit}>
                     <DropZone setImg={setFile}/>
-                    <InputBox type="text" placeholder="*제목을 작성해주세요: 글자수제한(50)"
+                    <InputBox type="text" placeholder="(필수) 제목을 작성해주세요: 글자수제한(50)"
                         name="title" value={title} onChange={onInputChange}
                     />
                     <InputBox type="text" disabled
                         name="location" value={location} onChange={onInputChange}
+                    />
+                    <InputBox type="email" placeholder="(선택) 연락할 이메일 주소를 작성해주세요." 
+                            name="contact" value={contact} onChange={onInputChange}
                     />
                     <CheckList>
                         <RadioButton checked={type} setChecked={onInputChange}/>

@@ -2,7 +2,8 @@ import React, {useEffect, useState} from 'react';
 import {useParams} from 'react-router-dom';
 import styled from 'styled-components';
 import axios from '../../../axios';
-import { FaDog } from 'react-icons/fa';
+import PinkFoot from '../../../assets/images/pink_foot.svg';
+import BlueFoot from '../../../assets/images/blue_foot.svg';
 
 import { COMMENT_SERVER, POST_SERVER } from '../../Config';
 import Comments from './Sections/Comments';
@@ -94,14 +95,16 @@ function PostDetail() {
                     {/* POST DETAIL */}
                     <PostBox>
                         <BoxHeader>
-                            {post.img 
+                            {
+                            post.img 
                                 ? <Image src={post.img}/>
-                                : <FaDog style={{width: '20%', height: '100%', padding: '0.9em'}}/>
+                                : (post.type === 'found' ?  <Image src={PinkFoot}/> : <Image src={BlueFoot}/>)
                             }
                             <TextBox>
                                 <h2>{post.title}</h2>
-                                <p>{post.location}</p>
-                                <p>{post.animal_type}</p>
+                                <p>위치: {post.location}</p>
+                                <p>종류: {post.animal_type}</p>
+                                {post.contact && <p>이메일 주소: {post.contact}</p>}
                             </TextBox>
                         </BoxHeader>
                         <BoxBody>{post.content}</BoxBody>
