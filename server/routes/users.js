@@ -7,7 +7,7 @@ const { auth } = require('../middleware/auth');
 router.get('/auth', auth, (req, res) => {
     res.status(200).json({
         _id: req.user._id,
-        isAdmin: req.user.role === 0 ? false: true, // admin != 0
+        isAdmin: req.user.role === 0 ? false: true,
         isAuth: true,
         email: req.user.email,
         name: req.user.name,
@@ -28,11 +28,6 @@ router.post('/register', (req, res) => {
 });
 
 router.post('/login', (req, res) => {
-    // 1. check if there is the same email address in DB
-    // 2. if there is, check password
-    // 3. if it correct, create token
-    
-    // 1.
     User.findOne({email: req.body.email}, (err, userInfo) => {
         if(!userInfo){
             return res.json({
@@ -40,12 +35,12 @@ router.post('/login', (req, res) => {
                 message: "일치하는 e-mail이 없습니다."
             });
         }
-        userInfo.comparePassword(req.body.password, (err, isMatch) => { // 2.
+        userInfo.comparePassword(req.body.password, (err, isMatch) => {
             if(!isMatch) return res.json({
                 loginSuccess: false, 
                 message: "잘못된 비밀번호입니다."
             });
-            userInfo.generateToken((err, user) => { // 3.
+            userInfo.generateToken((err, user) => {
                 if(err) return res.status(400).send(err);
                 // 쿠키에 토큰 저장
                 res.cookie("x_auth", user.token).status(200).json({

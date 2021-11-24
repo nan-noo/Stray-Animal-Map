@@ -66,12 +66,12 @@ function PostDetail() {
     const params = useParams();
 
     useEffect(() => {
-        axios.get(`${POST_SERVER}/post?postId=${params.postId}`)
+        axios.get(`${POST_SERVER}/post/${params.postId}`)
             .then(response => {
                 response.data.success ? setPost(response.data.post) : alert('Failed to get post');
             })
 
-        axios.get(`${COMMENT_SERVER}/allComments?postId=${params.postId}`)
+        axios.get(`${COMMENT_SERVER}/allComments/${params.postId}`)
             .then(response => {
                 response.data.success ? setCommentList(response.data.result) : alert('Failed to get comments');
             });

@@ -17,8 +17,8 @@ router.post('/comment', (req, res) => {
     });
 });
 
-router.get('/allComments', (req, res) => {
-    Comment.find({postId: req.query.postId})
+router.get('/allComments/:postId', (req, res) => {
+    Comment.find({postId: req.params.postId})
         .populate('writer')
         .exec((err, result) => {
             if(err) return res.status(400).send(err);

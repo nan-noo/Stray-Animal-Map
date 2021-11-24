@@ -37,8 +37,8 @@ router.get('/posts', (req, res) => {
         });
 });
 
-router.get('/post', (req, res) => {
-    Post.findOne({_id: req.query.postId})
+router.get('/post/:postId', (req, res) => {
+    Post.findOne({_id: req.params.postId})
         .exec((err, post) => {
             if(err) return res.json({success: false, err})
             return res.status(200).json({success: true, post})
