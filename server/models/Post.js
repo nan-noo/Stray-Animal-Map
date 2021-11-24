@@ -19,6 +19,7 @@ const postSchema = mongoose.Schema({
     latLng: {
         type: Object,
     },
+    contact: String,
 }, { timestamps: true});
 
 const Post = mongoose.model('Post', postSchema);
