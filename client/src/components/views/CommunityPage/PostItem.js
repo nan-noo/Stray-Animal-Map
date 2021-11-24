@@ -1,7 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import styled from 'styled-components';
-import {FaDog} from 'react-icons/fa';
+import PinkFoot from '../../../assets/images/pink_foot.svg';
+import BlueFoot from '../../../assets/images/blue_foot.svg';
 
 const ItemBox = styled.div`
     display: flex;
@@ -47,16 +48,12 @@ const TextBox = styled.div`
 
 function PostItem({item}) {
     const {_id, img, title, location, type, content, animal_type} = item;
-    const color = type === 'find' ? '#ec407a' : '#42a5f5';
+    const src = img || (type === 'found' ? PinkFoot : BlueFoot);
     
     return (
         <Link to={`/community/${_id}`}>
             <ItemBox>
-                {img 
-                    ? <Image src={img}/>
-                    : <FaDog style={{height: '30%', width: '30%', margin: '0.9em auto', color}}/>
-                }
-                
+                <Image src={src}/>
                 <TextBox>
                     <h2>{title}</h2>
                     <p>{animal_type}</p>
