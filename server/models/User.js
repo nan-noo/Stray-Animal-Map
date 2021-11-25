@@ -34,7 +34,6 @@ const userSchema = mongoose.Schema({
     }
 });
 
-// 화살표함수 쓰면 안 된다. 
 userSchema.pre('save', function(next){
     let user = this;
 

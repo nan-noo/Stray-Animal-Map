@@ -1,9 +1,11 @@
 const express = require('express');
 const router = express.Router();
 
+const {auth} = require('../middleware/auth');
+
 const { Comment } = require('../models/Comment');
 
-router.post('/comment', (req, res) => {
+router.post('/comment', auth, (req, res) => {
     const comment = new Comment(req.body);
     comment.save((err, comment) => {
         if(err) return res.json({success: false, err});
