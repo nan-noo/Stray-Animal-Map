@@ -9,8 +9,8 @@ export function loginUser(dataToSubmit){
     return {
         type: LOGIN_USER,
         payload: request
-    }
-}
+    };
+};
 
 export function registerUser(dataToSubmit){
     const request = axios.post(`${USER_SERVER}/register`, dataToSubmit) 
@@ -19,8 +19,8 @@ export function registerUser(dataToSubmit){
     return {
         type: REGISTER_USER,
         payload: request
-    }
-}
+    };
+};
 
 export function auth(){
     const request = axios.get(`${USER_SERVER}/auth`) 
@@ -29,15 +29,15 @@ export function auth(){
     return {
         type: AUTH_USER,
         payload: request
-    }
-}
+    };
+};
 
 export function logoutUser(){
-    const request = axios.get(`${USER_SERVER}/logout`) 
+    const request = axios.post(`${USER_SERVER}/logout`) 
         .then(response => response.data);
 
     return {
         type: LOGOUT_USER,
         payload: request
-    }
-}
+    };
+};

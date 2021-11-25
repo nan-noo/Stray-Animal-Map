@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
-import axios from 'axios';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import styled, {css} from 'styled-components';
 import { Link, useHistory } from 'react-router-dom';
 import {FiMenu} from 'react-icons/fi';
 
+import { logoutUser } from '../../../_actions/user_actions';
 import { LineButton, DrawerButton } from '../../../assets/Buttons';
 import {USER_SERVER} from '../../Config';
 
@@ -104,11 +104,12 @@ const Drawer = styled.div`
 function NavBar() {
     const [open, setOpen] = useState(false);
     const user = useSelector(state => state.user)
+    const dispatch = useDispatch();
     const history = useHistory();
 
     const logoutHandler = () => {
-        axios.get(`${USER_SERVER}/logout`).then(response => {
-            if (response.status === 200) {
+        dispatch(logoutUser()).then(response => {
+            if (response.payload.logoutSuccess) {
                 history.push("/login");
             } else {
                 alert('Log Out Failed')

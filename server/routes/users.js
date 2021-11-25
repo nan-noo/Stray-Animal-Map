@@ -53,7 +53,7 @@ router.post('/login', (req, res) => {
     })
 })
 
-router.get('/logout', auth, (req, res) => {
+router.post('/logout', auth, (req, res) => {
     User.findOneAndUpdate({_id: req.user._id}, {token: ""}, (err, user) => {
         if(err) return res.json({logoutSuccess: false, err});
         return res.status(200).send({logoutSuccess: true});
