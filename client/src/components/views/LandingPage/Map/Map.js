@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import { 
     GoogleMap, InfoWindow, Marker, StandaloneSearchBox,
     useJsApiLoader 
@@ -69,6 +69,7 @@ async function getGeocode(lat, lng){
 }
 
 function Map({checked1, checked2, setChecked1, setChecked2, selected}) {
+    const history = useHistory();
     const { isLoaded } = useJsApiLoader({
         id: 'google-map-script',
         googleMapsApiKey: GOOGLE_API_KEY,
@@ -97,41 +98,33 @@ function Map({checked1, checked2, setChecked1, setChecked2, selected}) {
     };
 
     const importSvg = (type, animalType) => {
-        let icon = '';
         if(type === 'found') {
             switch(animalType){
                 case '강아지':
-                    icon = foundDog;
-                    break;
+                    return foundDog;
                 case '고양이':
-                    icon = foundCat;
-                    break;
+                    return foundCat;
                 case '햄스터':
-                    icon = foundHam;
-                    break;
+                    return foundHam;
                 default:
-                    icon = foundEtc;
-                    break;
+                    return foundEtc;
             }
         }
-        else if(type === 'lost') {
+        else {
             switch(animalType){
                 case '강아지':
-                    icon = lostDog;
-                    break;
+                    return lostDog;
                 case '고양이':
-                    icon = lostCat;
-                    break;
+                    return lostCat;
                 case '햄스터':
-                    icon = lostHam;
-                    break;
+                    return lostHam;
                 default:
-                    icon = lostEtc;
-                    break;
+                    return lostEtc;
             }
         }
-        return icon;  
     };
+
+    const onMarkerClick = (id) => history.push(`/community/${id}`);
 
     return isLoaded ? (
                 <GoogleMap
@@ -167,7 +160,7 @@ function Map({checked1, checked2, setChecked1, setChecked2, selected}) {
                     {address && 
                         <InfoWindow
                             position={infoLocation}
-                            onCloseClick={()=>{ setAddress(''); }}
+                            onCloseClick={() => setAddress('')}
                         >   
                             <Link to={{
                                 pathname: '/upload',
@@ -177,6 +170,7 @@ function Map({checked1, checked2, setChecked1, setChecked2, selected}) {
                             </Link>
                         </InfoWindow>
                     }
+                    {/* Markers */}
                     {posts.map((post, index) => {
                         if(selected === '전체'){
                             if(checked1 && post.type === 'found') {
@@ -184,6 +178,7 @@ function Map({checked1, checked2, setChecked1, setChecked2, selected}) {
                                     key={index}
                                     icon={{url: importSvg(post.type, post.animal_type)}}
                                     position={post.latLng}
+                                    onClick={() => onMarkerClick(post._id)}
                                 />;
                             }
                             else if(checked2 && post.type === 'lost') {
@@ -191,6 +186,7 @@ function Map({checked1, checked2, setChecked1, setChecked2, selected}) {
                                     key={index}
                                     icon={{url: importSvg(post.type, post.animal_type)}}
                                     position={post.latLng}
+                                    onClick={() => onMarkerClick(post._id)}
                                 />;
                             }
                         }
@@ -200,6 +196,7 @@ function Map({checked1, checked2, setChecked1, setChecked2, selected}) {
                                     key={index}
                                     icon={{url: importSvg(post.type, post.animal_type)}}
                                     position={post.latLng}
+                                    onClick={() => onMarkerClick(post._id)}
                                 />;
                             }
                             else if(checked2 && post.type === 'lost' && selected === post.animal_type) {
@@ -207,9 +204,11 @@ function Map({checked1, checked2, setChecked1, setChecked2, selected}) {
                                     key={index}
                                     icon={{url: importSvg(post.type, post.animal_type)}}
                                     position={post.latLng}
+                                    onClick={() => onMarkerClick(post._id)}
                                 />;
                             }
                         }
+                        return <></>;
                     })}
                 </GoogleMap>
     ) : <p>Loading...</p>;
