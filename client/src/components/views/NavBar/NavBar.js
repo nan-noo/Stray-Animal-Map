@@ -124,7 +124,6 @@ function NavBar() {
                     style={{textAlign: 'center', fontSize: '1.5rem', padding: '0.5em 1em', color: '#ec407a'}}
                 >Logo</Link>
             </LogoBox>
-           
             {/* menu bar */}
             <MenuBar>
                 <Link to="/"
@@ -132,13 +131,12 @@ function NavBar() {
                 >
                     <LineButton>MAP</LineButton>
                 </Link>
-                <Link to="/community"
+                <Link to="/community/page/1"
                     style={{color: 'black'}}
                 >
                     <LineButton>COMMUNITY</LineButton>
                 </Link>
             </MenuBar>
-
             {/* login&register/logout */}
             <SubMenuBar>
                 {user.userData && !user.userData.isAuth

@@ -30,7 +30,7 @@ function App() {
               <Route exact path="/upload" component={Auth(UploadPage, true)} />
               <Route exact path="/login" component={Auth(LoginPage, false)} />
               <Route exact path="/register" component={Auth(RegisterPage, false)} />
-              <Route exact path="/community" component={Auth(CommunityPage, null)} />
+              <Route exact path="/community/page/:page(\d+)" component={Auth(CommunityPage, null)} />
               <Route exact path="/community/:postId" component={Auth(PostDetail, null)} />
             </Switch>
           </MapProvider>
