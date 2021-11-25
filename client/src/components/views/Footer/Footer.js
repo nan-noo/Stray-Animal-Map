@@ -10,7 +10,7 @@ function Footer() {
             justifyContent: 'center', fontSize: '1rem',
         }}>
             <p style={{textAlign: 'center', fontSize: '1rem', color: 'grey'}}> 
-                nannoo <AiOutlineSmile/>
+                nan-noo <AiOutlineSmile/>
             </p>
         </div>
     )

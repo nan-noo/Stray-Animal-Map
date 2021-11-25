@@ -49,7 +49,6 @@ function DropZone({setImg}) {
         reader.onload = (e) => setImage(e.target.result);
         reader.readAsDataURL(acceptedFiles[0]);
         setImg(acceptedFiles[0]);
-
     }, [setImg]);
 
     const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})

@@ -47,7 +47,7 @@ const InputBox = styled.input`
     outline: none;
     background: #fafafa;
 
-    &:hover{
+    &:focus{
         border: 1px solid #ec407a;
     }
 `;
@@ -64,7 +64,7 @@ const ContentArea = styled.textarea`
     outline: none;
     background: #fafafa;
 
-    &:hover{
+    &:focus{
         border: 1px solid #ec407a;
     }
 `;
@@ -153,7 +153,7 @@ function UploadPage() {
                         <RadioButton checked={type} setChecked={onInputChange}/>
                         <DropList selected={animal_type} onChange={onInputChange}/>
                     </CheckList>
-                    <ContentArea name="content" value={content} onChange={onInputChange} placeholder="내용을 작성해주세요" maxLength="2000"/>
+                    <ContentArea name="content" value={content} onChange={e => setContent(e.target.value)} placeholder="내용을 작성해주세요" maxLength="2000"/>
                     <PrimaryButton>upload</PrimaryButton>
                 </FormBox>
             </UploadBox>  

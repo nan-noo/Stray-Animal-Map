@@ -25,8 +25,12 @@ const TextArea = styled.textarea`
     flex-grow: 1;
     border-radius: 5px;
     border: 1px solid #e0e0e0;
-    
+    outline: none;
     padding: 0.9em;
+
+    &:focus{
+        border: 1px solid #ec407a;
+    }
 `;
 
 const ReplyBox = styled.div`
@@ -41,11 +45,11 @@ function Comments({commentList, postId, refreshFunction}) {
         e.preventDefault();
         
         if(!user.userData.isAuth){
-            alert('You need to login');
+            alert('로그인이 필요합니다.');
             return;
         }
         if(!commentValue){
-            alert('no content');
+            alert('내용을 작성해주세요.');
             return;
         }
 
