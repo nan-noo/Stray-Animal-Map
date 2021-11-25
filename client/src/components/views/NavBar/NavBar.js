@@ -6,7 +6,7 @@ import {FiMenu} from 'react-icons/fi';
 
 import { logoutUser } from '../../../_actions/user_actions';
 import { LineButton, DrawerButton } from '../../../assets/Buttons';
-import {USER_SERVER} from '../../Config';
+import favicon from '../../../assets/images/favicon.svg';
 
 const NavBox = styled.nav`
     width: 100%;
@@ -101,6 +101,12 @@ const Drawer = styled.div`
     }
 `;
 
+const Logo = styled.img`
+    width: 3rem;
+    height: 3rem;
+    margin-right: .2em;
+`;
+
 function NavBar() {
     const [open, setOpen] = useState(false);
     const user = useSelector(state => state.user)
@@ -123,7 +129,7 @@ function NavBar() {
             <LogoBox>
                 <Link to="/" 
                     style={{textAlign: 'center', fontSize: '1.5rem', padding: '0.5em 1em', color: '#ec407a'}}
-                >Logo</Link>
+                ><Logo alt="logo" src={favicon}/></Link>
             </LogoBox>
             {/* menu bar */}
             <MenuBar>

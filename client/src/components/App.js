@@ -11,11 +11,8 @@ import Footer from './views/Footer/Footer';
 
 import MapProvider from '../context/MapContext';
 
-// Auth(component, loginOption, adminRoute)
 import Auth from '../hoc/auth';
 import UploadPage from './views/UploadPage/UploadPage';
-
-// const EnhancedComponent = higherOrderComponent(WrappedComponent, opt...); // hoc
 
 function App() {
   return (
