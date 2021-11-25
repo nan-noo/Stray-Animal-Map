@@ -2,6 +2,8 @@ const express = require('express');
 const multer = require('multer');
 const router = express.Router();
 
+const {auth} = require('../middleware/auth');
+
 const { Post } = require('../models/Post');
 
 const storage = multer.diskStorage({
@@ -15,7 +17,7 @@ const storage = multer.diskStorage({
 
 const uploadImageMulter = multer({storage}).single('file');
 
-router.post('/post', (req, res) => {
+router.post('/post', auth, (req, res) => {
     const post = new Post(req.body);
     post.save((err, doc) => {
         if(err) return res.json({success: false, err})
@@ -23,7 +25,7 @@ router.post('/post', (req, res) => {
     });
 });
 
-router.post('/image', (req, res) => {
+router.post('/image', auth, (req, res) => {
     uploadImageMulter(req, res, err => {
         err ? res.json({success: false, err}) : res.status(200).json({success: true, filePath: req.file.path});
     });
