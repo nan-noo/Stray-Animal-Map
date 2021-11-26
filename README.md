@@ -69,7 +69,13 @@ SPA using react-router-dom
 - [x] List Posts filtered by Map-Bound, Type-Checkbox and Animal-Type-DropList  
 - [x] Comments  
 - [x] Responsive Web  
-- [ ] Choose whether to disclose user info(email) or not
+- [x] Choose whether to disclose user info(email) or not
+- [x] Go to the post through Marker onClick Event
+
+---
+
+## Screen
+![잃어버린 동물 지도 (2)](https://user-images.githubusercontent.com/54002105/143589099-12932b20-1efe-490a-bc19-aec3b21f4e84.gif)
 
 ---
 
