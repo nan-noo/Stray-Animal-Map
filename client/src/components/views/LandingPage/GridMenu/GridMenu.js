@@ -4,6 +4,7 @@ import DropList from '../../../../assets/DropList';
 import { useMapState } from '../../../../context/MapContext';
 
 import Items from './Items';
+import LoadingBox from '../../../../assets/LoadingBox';
 
 const OnOffButton = styled.button`
     position: absolute;
@@ -99,7 +100,7 @@ function GridMenu({checked1, checked2, selected, setSelected}) {
                 <Items checked1={checked1} checked2={checked2} posts={posts} mapBounds={bounds} selected={selected}/>
             </GridBox>
         </>
-    ) : <p>Loading...</p>;
+    ) : <LoadingBox text="Loading..."/>;
 }
 
 export default GridMenu;

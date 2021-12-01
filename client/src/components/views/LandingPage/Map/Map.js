@@ -13,6 +13,7 @@ import libraries from './libraries/libraries';
 import CheckBox from '../../../../assets/CheckBox';
 import {GOOGLE_API_KEY} from '../../../../secret';
 import { useMapState, useMapDispatch } from '../../../../context/MapContext';
+import LoadingBox from '../../../../assets/LoadingBox';
 
 import foundDog from '../../../../assets/images/markers/found_dog.svg';
 import foundCat from '../../../../assets/images/markers/found_cat.svg';
@@ -211,7 +212,7 @@ function Map({checked1, checked2, setChecked1, setChecked2, selected}) {
                         return <></>;
                     })}
                 </GoogleMap>
-    ) : <p>Loading...</p>;
+    ) : <LoadingBox text="Loading..."/>;
 }
 
 export default Map;

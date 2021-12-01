@@ -5,13 +5,14 @@ import Geocode from "react-geocode";
 import styled from 'styled-components';
 import axios from '../../../axios';
 
-import {POST_SERVER, BASE_SERVER} from '../../Config';
+import {POST_SERVER} from '../../Config';
 import {GOOGLE_API_KEY} from '../../../secret';
 
 import { PrimaryButton } from '../../../assets/Buttons';
 import RadioButton from '../../../assets/RadioButton';
 import DropZone from './DropZone';
 import DropList from '../../../assets/DropList';
+import LoadingBox from '../../../assets/LoadingBox';
 
 const UploadBox = styled.div`
     display: flex;
@@ -102,6 +103,8 @@ function UploadPage() {
     const [content, setContent] = useState('');
     const [file, setFile] = useState('');
 
+    const [loading, setLoading] = useState(false);
+
     const uploadImage = async file => {
         const formData = new FormData();
         const config = { header: { "content-type": "multipart/form-data"} };
@@ -109,21 +112,28 @@ function UploadPage() {
         
         const response = await axios.post(`${POST_SERVER}/image`, formData, config)
         if(response.data.success){
-            return `${BASE_SERVER}/${response.data.filePath}`;
+            return response.data.filePath;
         }
-        else return '';
+        else {
+            alert(response.data.message);
+            return '';
+        }
     };
 
     const onSubmit = async e => {
         e.preventDefault();
 
+        setLoading(true);
         if(location && title){
             const img = file && await uploadImage(file);
             const data = { ...inputs, content, img, writer: user.userData._id, latLng: await getGeocode(location)}
             const response = await axios.post(`${POST_SERVER}/post`, data);
+
+            setLoading(false);
             response.data.success ? history.push('/') : alert('Failed to upload post');
         }
         else{
+            setLoading(false);
             alert('작성하지 않은 항목이 있습니다.');
         }
     };
@@ -135,6 +145,7 @@ function UploadPage() {
 
     return (
         <div className="app">
+            {loading && <LoadingBox text="Uploading..."/>}
             <UploadBox>
                 <h2>Upload Post</h2>
                 {/* title, img, content, location, type */}
