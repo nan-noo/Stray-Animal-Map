@@ -56,6 +56,7 @@ function SingleComment({comment, postId, refreshFunction}) { // 댓글과 대댓
                         onChange={e => setCommentValue(e.currentTarget.value)}
                         value={commentValue}
                         placeholder= '대댓글을 작성해주세요.'
+                        maxLength="1000"
                     />
                     <br/>
                     <SecondaryButton width="15%" onClick={onSubmit}>Submit</SecondaryButton>

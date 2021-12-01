@@ -72,7 +72,7 @@ function Comments({commentList, postId, refreshFunction}) {
         <CommentsBox>
             <p style={{padding: '0.9em 0.9em 0'}}>{commentList.length} Replies</p>
             <CommentForm onSubmit={onSubmit}>
-                <TextArea placeholder="댓글을 작성해주세요." value={commentValue} onChange={e => setCommentValue(e.target.value)}/>
+                <TextArea placeholder="댓글을 작성해주세요." value={commentValue} onChange={e => setCommentValue(e.target.value)} maxLength="1000"/>
                 <PrimaryButton type="submit" width="5em">Submit</PrimaryButton>
             </CommentForm>
 
