@@ -11,7 +11,7 @@ import {IoSearchOutline} from 'react-icons/io5';
 import mapStyle from './style/mapStyle';
 import libraries from './libraries/libraries';
 import CheckBox from '../../../../assets/CheckBox';
-import {GOOGLE_API_KEY} from '../../../../config/secret';
+import {GOOGLE_API_KEY} from '../../../../config/config';
 import { useMapState, useMapDispatch } from '../../../../context/MapContext';
 import LoadingBox from '../../../../assets/LoadingBox';
 
