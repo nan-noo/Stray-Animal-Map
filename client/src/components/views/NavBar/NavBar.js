@@ -109,13 +109,18 @@ const Logo = styled.img`
 
 function NavBar() {
     const [open, setOpen] = useState(false);
-    const user = useSelector(state => state.user)
+    const user = useSelector(state => state.user);
     const dispatch = useDispatch();
     const history = useHistory();
 
     const logoutHandler = () => {
-        dispatch(logoutUser()).then(response => {
+        const dataToSubmit = {
+            x_auth: window.localStorage.getItem('x_auth'),
+        };
+        dispatch(logoutUser(dataToSubmit)).then(response => {
             if (response.payload.logoutSuccess) {
+                window.localStorage.removeItem('x_auth');
+                window.localStorage.removeItem('userId');
                 history.push("/login");
             } else {
                 alert('Log Out Failed')

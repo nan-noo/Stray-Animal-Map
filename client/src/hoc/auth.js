@@ -11,7 +11,11 @@ const authentication = function(SpecificComponent, option, adminRoute = null){
         const dispatch = useDispatch();
 
         useEffect(() => {
-            dispatch(auth()).then(response => {
+            const dataToSubmit = {
+                x_auth: window.localStorage.getItem('x_auth'),
+            }
+
+            dispatch(auth(dataToSubmit)).then(response => {
                 if(!response.payload.isAuth){ // 로그인 안 한 상태
                     if(option){
                         history.push('/login');

@@ -36,6 +36,8 @@ function LoginPage(props) {
             .then(response => {
                 if(response.payload.loginSuccess){
                     window.localStorage.setItem('userId', response.payload.userId);
+                    window.localStorage.setItem('x_auth', response.payload.userToken);
+                    
                     if(RememberMe) window.localStorage.setItem('rememberMe', values.email);
                     else localStorage.removeItem('rememberMe');
 
