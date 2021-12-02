@@ -20,11 +20,12 @@ server: https://github.com/nan-noo/Stray-Animal-Map-Server
 
 0. clone or download project
 
-1. create secret.js file in './client/src' and export your google api key.
+1. create .env file in root folder
 
-```JS
-    export const GOOGLE_API_KEY = "YOUR_GOOGLE_KEY";
-    export const SERVER_URL = "YOUR_SERVER_ADDRESS"; // no need for local server
+```
+    REACT_APP_GOOGLE_API_KEY=<YOUR_API_KEY>
+
+    REACT_APP_SERVER_URL=<YOUR_EXTERNAL_SERVER>
 ```
 
 3. install node_modules in root folder
