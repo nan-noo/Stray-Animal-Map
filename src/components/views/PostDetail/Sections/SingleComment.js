@@ -26,6 +26,7 @@ function SingleComment({comment, postId, refreshFunction}) { // 댓글과 대댓
             writer: user.userData._id,
             postId: postId,
             responseTo: comment._id,
+            x_auth: window.localStorage.getItem("x_auth"),
         };
 
         axios.post(`${COMMENT_SERVER}/comment`, data)

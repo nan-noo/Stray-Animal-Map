@@ -126,7 +126,12 @@ function UploadPage() {
         setLoading(true);
         if(location && title){
             const img = file && await uploadImage(file);
-            const data = { ...inputs, content, img, writer: user.userData._id, latLng: await getGeocode(location)}
+            const data = { 
+                ...inputs, content, img, 
+                writer: user.userData._id, 
+                latLng: await getGeocode(location),
+                x_auth: window.localStorage.getItem("x_auth"),
+            };
             const response = await axios.post(`${POST_SERVER}/post`, data);
 
             setLoading(false);

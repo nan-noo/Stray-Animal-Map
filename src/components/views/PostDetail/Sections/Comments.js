@@ -53,10 +53,12 @@ function Comments({commentList, postId, refreshFunction}) {
             return;
         }
 
+        const x_auth = window.localStorage.getItem("x_auth");
         const data = {
             content: commentValue,
             writer: user.userData._id,
             postId: postId,
+            x_auth,
         };
         axios.post(`${COMMENT_SERVER}/comment`, data)
             .then(response => {
