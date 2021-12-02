@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { SERVER_URL } from './config/secret';
+import { SERVER_URL } from './config/config';
 
-axios.defaults.baseURL = process.env.NODE_ENV === 'development' ? '/' : SERVER_URL;
+axios.defaults.baseURL = SERVER_URL;
 export default axios;
