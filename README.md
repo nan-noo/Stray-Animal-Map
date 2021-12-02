@@ -13,7 +13,7 @@ still developing...
 
 ---
 
-## Start
+## Start - dev
 
 0. clone or download project
 
@@ -29,6 +29,7 @@ still developing...
 
 ```JS
     export const GOOGLE_API_KEY = "YOUR_GOOGLE_KEY";
+    export const SERVER_URL = "YOUR_SERVER_ADDRESS"; // no need for 'localhost'
 ```
 
 3. install node_modules both './server' and './client' folder
@@ -62,19 +63,20 @@ SPA using react-router-dom
 
 ## Functions
 
-- [x] Login & Register  
-- [x] Search Location  
-- [x] Geocode Location, LatLng  
-- [x] Upload Post through Map onClick Event  
-- [x] List Posts filtered by Map-Bound, Type-Checkbox and Animal-Type-DropList  
-- [x] Comments  
-- [x] Responsive Web  
+- [x] Login & Register
+- [x] Search Location
+- [x] Geocode Location, LatLng
+- [x] Upload Post through Map onClick Event
+- [x] List Posts filtered by Map-Bound, Type-Checkbox and Animal-Type-DropList
+- [x] Comments
+- [x] Responsive Web
 - [x] Choose whether to disclose user info(email) or not
 - [x] Go to the post through Marker onClick Event
 
 ---
 
 ## Screen
+
 ![잃어버린 동물 지도 (2)](https://user-images.githubusercontent.com/54002105/143589099-12932b20-1efe-490a-bc19-aec3b21f4e84.gif)
 
 ---
@@ -112,3 +114,14 @@ SPA using react-router-dom
 
 - more detail  
   <a href="https://first-daisy-ddd.notion.site/Stray-Animal-Map-209a68fa7d974e60bf814b9282bd2ca1">LINK</a>
+
+---
+
+## Trouble-shooting
+
+항상 cors가 문제다!!! 단순 동일 출처가 아니어서 요청이 안되는 경우는 cors 모듈 호출만 하면 해결되었지만, 프론트의 쿠키가 서버에 전송이 안 됐다. cookie를 보낼 수 있기 위해 프론트와 백 모두 설정을 더 해야 했다.
+
+- 프론트: 인증, 로그아웃 관련 action 함수에서 axios 요청을 보낼 때 config option으로 {withCredentials: true} 추가
+- 백: cors({origin: true, credentials: true}) 옵션 필요
+
+이렇게 하고 나서 로컬에서는 오류가 안 났는데, ec2 정책 상 allow-origin이 항상 '\*'이라 쿠키와 같은 credential을 허용하지 않는다고 한다.. 쿠키 대신 localstorage로 바꿔봐야 겠다.. -> 성공!!!!! cors 에러가 사라졌다.
