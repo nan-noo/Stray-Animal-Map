@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import axios from '../../../axios';
 
 import {POST_SERVER} from '../../Config';
-import {GOOGLE_API_KEY} from '../../../secret';
+import {GOOGLE_API_KEY} from '../../../config/secret';
 
 import { PrimaryButton } from '../../../assets/Buttons';
 import RadioButton from '../../../assets/RadioButton';

@@ -14,35 +14,29 @@ still developing...
 
 ---
 
-## Start - dev
+## Start - front
+
+server: https://github.com/nan-noo/Stray-Animal-Map-Server
 
 0. clone or download project
 
-1. create dev.js file in './server/config' and export your mongodb key.
-
-```JS
-    // dev.js
-    module.exports = {mongoURI: 'YOUR_MONGO_URI'};
-
-```
-
-2. create secret.js file in './client/src' and export your google api key.
+1. create secret.js file in './client/src' and export your google api key.
 
 ```JS
     export const GOOGLE_API_KEY = "YOUR_GOOGLE_KEY";
-    export const SERVER_URL = "YOUR_SERVER_ADDRESS"; // no need for 'localhost'
+    export const SERVER_URL = "YOUR_SERVER_ADDRESS"; // no need for local server
 ```
 
-3. install node_modules both './server' and './client' folder
+3. install node_modules in root folder
 
 ```
     npm install
 ```
 
-4. run the project in './server'
+4. run the project in root folder
 
 ```
-    npm run dev
+    npm run start
 ```
 
 - development: server port 5000, client port 3000
@@ -84,32 +78,24 @@ SPA using react-router-dom
 
 ## Modules
 
-| server                    | client                                   |
-| ------------------------- | ---------------------------------------- |
-| "bcrypt": "^5.0.1"        | "@ant-design/icons": "^4.7.0"            |
-| "cookie-parser": "^1.4.5" | "@react-google-maps/api": "^2.4.0"       |
-| "cors": "^2.8.5"          | "@testing-library/jest-dom": "^5.14.1"   |
-| "express": "^4.17.1"      | "@testing-library/react": "^11.2.7"      |
-| "jsonwebtoken": "^8.5.1"  | "@testing-library/user-event": "^12.8.3" |
-| "mongoose": "^5.13.3"     | "antd": "^4.16.8"                        |
-| "multer": "^1.4.3"        | "axios": "^0.21.4"                       |
-|                           | "formik": "^2.2.9"                       |
-|                           | "http-proxy-middleware": "^2.0.1"        |
-|                           | "moment": "^2.29.1"                      |
-|                           | "react": "^17.0.2"                       |
-|                           | "react-dom": "^17.0.2"                   |
-|                           | "react-dropzone": "^11.4.2"              |
-|                           | "react-geocode": "^0.2.3"                |
-|                           | "react-icons": "^4.3.1"                  |
-|                           | "react-redux": "^7.2.4"                  |
-|                           | "react-router-dom": "^5.2.0"             |
-|                           | "react-scripts": "^3.4.4"                |
-|                           | "redux": "^4.1.0"                        |
-|                           | "redux-promise": "^0.6.0"                |
-|                           | "redux-thunk": "^2.3.0"                  |
-|                           | "styled-components": "^5.3.3"            |
-|                           | "web-vitals": "^1.1.2"                   |
-|                           | "yup": "^0.32.9"                         |
+| client                             | detail                            |
+| ---------------------------------- | --------------------------------- |
+| "@ant-design/icons": "^4.7.0"      | use antd icons                    |
+| "@react-google-maps/api": "^2.4.0" | use google map api                |
+| "antd": "^4.16.8"                  | use antd style components         |
+| "axios": "^0.21.4"                 | request to server                 |
+| "formik": "^2.2.9"                 | use customized form               |
+| "yup": "^0.32.9"                   | use customized form               |
+| "moment": "^2.29.1"                | user profile image                |
+| "react-dropzone": "^11.4.2"        | drag & drop image                 |
+| "react-geocode": "^0.2.3"          | use geocode api                   |
+| "react-icons": "^4.3.1"            | use react icons                   |
+| "react-redux": "^7.2.4"            | manage state                      |
+| "react-router-dom": "^5.2.0"       | SPA                               |
+| "redux": "^4.1.0"                  | manage state                      |
+| "redux-promise": "^0.6.0"          | redux middleware: handle promise  |
+| "redux-thunk": "^2.3.0"            | redux middleware: handle function |
+| "styled-components": "^5.3.3"      | use styled components             |
 
 ---
 
