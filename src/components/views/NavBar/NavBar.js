@@ -178,7 +178,7 @@ function NavBar() {
                 >
                     <LineButton>MAP</LineButton>
                 </Link>
-                <Link to="/community"
+                <Link to="/community/page/1"
                     style={{color: 'black', width: '100%'}}
                 >
                     <LineButton>COMMUNITY</LineButton>
