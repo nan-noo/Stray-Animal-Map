@@ -66,7 +66,6 @@ SPA using react-router-dom
 - [x] List Posts filtered by Map-Bound, Type-Checkbox and Animal-Type-DropList
 - [x] Comments
 - [x] Responsive Web
-- [x] Choose whether to disclose user info(email) or not
 - [x] Go to the post through Marker onClick Event
 
 ---
