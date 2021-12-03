@@ -113,3 +113,5 @@ SPA using react-router-dom
 - 백: cors({origin: true, credentials: true}) 옵션 필요
 
 이렇게 하고 나서 로컬에서는 오류가 안 났는데, ec2 정책 상 allow-origin이 항상 '\*'이라 쿠키와 같은 credential을 허용하지 않는다고 한다.. 쿠키 대신 localstorage로 바꿔봐야 겠다.. -> 성공!!!!! cors 에러가 사라졌다.
+
+amplify로 배포했더니 ec2 서버에 SSL 등록이 필요했다. SSL 등록 후 nginx에 443번 포트에 들어오는 요청을 로컬서버에 프록시 패스 했더니 성공!
