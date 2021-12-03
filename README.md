@@ -2,7 +2,7 @@
 
 stray animal map + community  
 you can register lost or found animals on the map  
-still developing...
+service: https://main.dx5sql2638rg8.amplifyapp.com/
 
 <p>
 <img src="https://img.shields.io/badge/React.js-61DAFB?style=flat-square&logo=react&logoColor=black">&nbsp;
