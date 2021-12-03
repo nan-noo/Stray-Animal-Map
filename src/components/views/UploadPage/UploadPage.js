@@ -158,6 +158,7 @@ function UploadPage() {
                     <DropZone setImg={setFile}/>
                     <InputBox type="text" placeholder="(필수) 제목을 작성해주세요: 글자수제한(50)"
                         name="title" value={title} onChange={onInputChange}
+                        maxLength='50'
                     />
                     <InputBox type="text" disabled
                         name="location" value={location} onChange={onInputChange}

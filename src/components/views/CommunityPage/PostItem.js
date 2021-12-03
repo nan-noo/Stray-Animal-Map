@@ -46,6 +46,14 @@ const TextBox = styled.div`
     padding: 0.9em;
 `;
 
+const Text = styled.p`
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: ${props => props.fontSize || '0.8rem'};
+`;
+
 function PostItem({item}) {
     const {_id, img, title, location, type, content, animal_type} = item;
     const src = img || (type === 'found' ? PinkFoot : BlueFoot);
@@ -55,10 +63,10 @@ function PostItem({item}) {
             <ItemBox>
                 <Image src={src}/>
                 <TextBox>
-                    <h2>{title}</h2>
-                    <p>{animal_type}</p>
-                    <p>{`${location.slice(0,15)}...`}</p>
-                    <p>{`${content.slice(0,15)}...`}</p>
+                    <Text fontSize='1.2rem'>{title}</Text>
+                    <Text>{animal_type}</Text>
+                    <Text>{location}</Text>
+                    <Text>{content}</Text>
                 </TextBox>
             </ItemBox>
         </Link> 
