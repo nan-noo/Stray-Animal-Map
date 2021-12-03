@@ -133,7 +133,8 @@ function Map({checked1, checked2, setChecked1, setChecked2, selected}) {
                     center={center}
                     zoom={10}
                     options={{
-                        styles: mapStyle
+                        styles: mapStyle,
+                        disableDefaultUI: true,
                     }}
                     onLoad={onGoogleMapLoad}
                     onBoundsChanged={() => {dispatch({type: 'UPDATE_BOUNDS', bounds: googleMap.getBounds()});}}
