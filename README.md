@@ -100,6 +100,12 @@ SPA using react-router-dom
 
 ---
 
+## Service Flow
+
+![그림1](https://user-images.githubusercontent.com/54002105/144594308-e5e6e72f-043f-4f47-87f9-5d7ae7a0d0a2.png)
+
+---
+
 - more detail  
   <a href="https://first-daisy-ddd.notion.site/Stray-Animal-Map-209a68fa7d974e60bf814b9282bd2ca1">LINK</a>
 
