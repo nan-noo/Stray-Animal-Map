@@ -43,7 +43,7 @@ export const SecondaryButton = styled.button`
 `;
 
 export const LinkButton = styled.button`
-    background: white;
+    background: #fafafa;
     color: #ec407a;
 
     border: none;

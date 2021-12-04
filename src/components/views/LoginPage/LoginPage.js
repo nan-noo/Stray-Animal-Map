@@ -84,9 +84,10 @@ function LoginPage(props) {
                                             : "text-input"
                                     }
                                 />
-                                {errors.email && touched.email && (
-                                    <div className="input-feedback">{errors.email}</div>
-                                )}
+                                {errors.email && touched.email 
+                                    ? <div className="input-feedback">{errors.email}</div>
+                                    : <div className="input-no-feedback">blank</div>
+                                }
                             </Form.Item>
                             <Form.Item>
                                 <Input.Password
@@ -104,9 +105,10 @@ function LoginPage(props) {
                                             : "text-input"
                                     }
                                 />
-                                {errors.password && touched.password && (
-                                    <div className="input-feedback">{errors.password}</div>
-                                )}
+                                {errors.password && touched.password 
+                                    ? <div className="input-feedback">{errors.password}</div>
+                                    : <div className="input-no-feedback">blank</div>
+                                }
                             </Form.Item>
 
                             <Form.Item>

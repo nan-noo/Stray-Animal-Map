@@ -36,13 +36,11 @@ input.error {
 
 .input-feedback {
   color: red;
-  height: 5px;
-  font-size: 2px;
+  font-size: 0.5rem;
   text-align: end;
 }
 
 .input-no-feedback {
   visibility: hidden;
-  height: 5px;
-  font-size: 2px;
+  font-size: 0.5rem;
 }
