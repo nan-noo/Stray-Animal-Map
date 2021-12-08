@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useParams} from 'react-router-dom';
 import styled from 'styled-components';
 import axios from '../../../axios';
+import { useSelector } from 'react-redux';
 import PinkFoot from '../../../assets/images/pink_foot.svg';
 import BlueFoot from '../../../assets/images/blue_foot.svg';
 
@@ -61,6 +62,7 @@ const BoxBody = styled.p`
 `;
 
 function PostDetail() {
+    const user = useSelector(state => state.user);
     const [post, setPost] = useState(null);
     const [commentList, setCommentList] = useState([]);
     const params = useParams();
@@ -104,7 +106,7 @@ function PostDetail() {
                                 <h2>{post.title}</h2>
                                 <p>위치: {post.location}</p>
                                 <p>종류: {post.animal_type}</p>
-                                {post.contact && <p>이메일 주소: {post.contact}</p>}
+                                {user?.userData?.isAuth && post.contact && <p>이메일 주소: {post.contact}</p>}
                             </TextBox>
                         </BoxHeader>
                         <BoxBody>{post.content}</BoxBody>
